@@ -1,0 +1,64 @@
+C51 COMPILER V9.01   DAC                                                                   03/02/2021 17:30:31 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE DAC
+OBJECT MODULE PLACED IN DAC.OBJ
+COMPILER INVOKED BY: C:\单片机\C51\BIN\C51.EXE DAC.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg52.h>
+   2          #define uchar unsigned char
+   3          #define uint unsigned int
+   4          uchar flag,a;
+   5          void ser();
+   6          void init();
+   7          int main(void)
+   8          {
+   9   1       init();
+  10   1       while(1)
+  11   1       {
+  12   2       if(flag==1)
+  13   2       {
+  14   3       ES=0;
+  15   3       SBUF=a;
+  16   3       while(!TI);    
+  17   3       ES=1;
+  18   3       flag=0;
+  19   3      
+  20   3       }
+  21   2       }
+  22   1      }
+  23          void ser() interrupt 4
+  24          {
+  25   1      a=SBUF;
+  26   1      flag=1;
+  27   1      RI=0;
+  28   1      }
+  29          void init()
+  30          {
+  31   1      flag=0;
+  32   1      TMOD=0x20;//定时器工作方式2
+  33   1      TH1=0xfd;
+  34   1      TL1=0xfd;
+  35   1      TR1=1;
+  36   1      EA=1;
+  37   1      ES=1;
+  38   1      SM0=0;
+  39   1      SM1=1;
+  40   1      REN=1;
+  41   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     57    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

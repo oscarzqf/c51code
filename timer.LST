@@ -1,0 +1,279 @@
+C51 COMPILER V9.01   TIMER                                                                 03/07/2021 22:34:35 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE TIMER
+OBJECT MODULE PLACED IN timer.OBJ
+COMPILER INVOKED BY: C:\单片机\C51\BIN\C51.EXE timer.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /*一个可以调试间闹钟*/
+   2          
+   3          #include<reg52.h>
+   4          #include<intrins.h>
+   5          #define uchar unsigned char
+   6          #define uint unsigned int
+   7          uchar code table0[]={0xc0,0xf9,0xa4,
+   8                              0xb0,0x99,0x92,0x82,
+   9                              0xf8,0x80,0x90};//0~9
+  10          sbit BEEP=P3^6;
+  11          sbit rw=P0^6;
+  12          sbit rs=P0^7;
+  13          sbit lcden=P0^5;//液晶选项
+  14          sbit key1=P3^5;
+  15          sbit key2=P3^4;
+  16          sbit key3=P3^3;
+  17          sbit key4=P3^2;//
+  18          uchar count,s1number;
+  19          char miao,shi,fen;
+  20          void delay500() //延时500微秒
+  21          {
+  22   1      uchar i;
+  23   1      for(i=230;i>0;i--);
+  24   1      }
+  25          uchar code table1[]="    I love study";//16
+  26          uchar code table2[]="    00:00:00";//12
+  27          void delay_(uint z)      //延时
+  28          {
+  29   1      uint x,y;
+  30   1      for(x=z;x>0;x--)
+  31   1      for(y=110;y>0;y--)
+  32   1      ;
+  33   1      }
+  34          void write_com(uchar com)//液晶写指令
+  35          {
+  36   1      rw=0;
+  37   1      rs=0;
+  38   1      P2=com;
+  39   1      delay_(10);
+  40   1      lcden=1;
+  41   1      delay_(10);
+  42   1      lcden=0;
+  43   1      }
+  44          void write_date(uchar date)//液晶写数据
+  45          {
+  46   1      rw=0;
+  47   1      rs=1;
+  48   1      P2=date;
+  49   1      delay_(10);
+  50   1      lcden=1;
+  51   1      delay_(10);
+  52   1      lcden=0;
+  53   1      }
+  54          void init()
+  55          {
+C51 COMPILER V9.01   TIMER                                                                 03/07/2021 22:34:35 PAGE 2   
+
+  56   1      uchar num;
+  57   1      lcden=0;
+  58   1      rw=0;
+  59   1      write_com(0x38);
+  60   1      write_com(0x0c);
+  61   1      write_com(0x06);
+  62   1      write_com(0x01);//清屏
+  63   1      write_com(0x80);
+  64   1      for(num=0;num<16;num++)
+  65   1      {
+  66   2      write_date(table1[num]);
+  67   2      delay_(5);
+  68   2      }
+  69   1      write_com(0x80+0x40);
+  70   1      for(num=0;num<12;num++)
+  71   1      {
+  72   2      write_date(table2[num]);
+  73   2      delay_(5);
+  74   2      }
+  75   1      TMOD=0X01;
+  76   1      TH0=(65536-50000)/256;
+  77   1      TL0=(65536-50000)%256;
+  78   1      EA=1;
+  79   1      ET0=1;
+  80   1      TR0=1;
+  81   1      }
+  82          void write_sfm(uchar add,uchar date)
+  83          {
+  84   1      uchar shi,ge;
+  85   1      shi=date/10;
+  86   1      ge=date%10;
+  87   1      write_com(0x80+0X40+add);
+  88   1      write_date(0x30+shi);
+  89   1      write_date(0x30+ge);
+  90   1      }
+  91          void keyscan_()
+  92          {
+  93   1      if(key1==0)
+  94   1      {
+  95   2      delay_(5);
+  96   2      if(key1==0)
+  97   2      {
+  98   3      s1number++;
+  99   3      while(!key1);
+ 100   3      if(s1number==1)
+ 101   3      {
+ 102   4      TR0=0;
+ 103   4      write_com(0x80+0x40+11);//地址在秒个位
+ 104   4      write_com(0x0f); //光标闪烁
+ 105   4      }
+ 106   3      if(s1number==2)
+ 107   3      {
+ 108   4      write_com(0x80+0x40+8);//地址在分钟
+ 109   4      }
+ 110   3      if(s1number==3)
+ 111   3      {
+ 112   4      write_com(0x80+0x40+5);//小时闪烁
+ 113   4      }
+ 114   3      if(s1number==4)
+ 115   3      {
+ 116   4      s1number=0;//清零进行下次
+ 117   4      write_com(0x0c);//光标停止闪烁
+C51 COMPILER V9.01   TIMER                                                                 03/07/2021 22:34:35 PAGE 3   
+
+ 118   4      TR0=1;
+ 119   4      }
+ 120   3      }
+ 121   2      }
+ 122   1      if(s1number!=0)
+ 123   1      {
+ 124   2      if(key2==0)
+ 125   2      {
+ 126   3      delay_(5);
+ 127   3      if(key2==0)
+ 128   3      {
+ 129   4      while(!key2);
+ 130   4      if(s1number==1)
+ 131   4      {
+ 132   5      miao++;
+ 133   5      if(miao==60)
+ 134   5      miao=0;
+ 135   5      write_sfm(10,miao);
+ 136   5      write_com(0x80+0x40+11);
+ 137   5      }
+ 138   4      if(s1number==2)
+ 139   4      {
+ 140   5      fen++;
+ 141   5      if(fen==60)
+ 142   5      fen=0;
+ 143   5      write_sfm(7,fen);
+ 144   5      write_com(0x80+0x40+7);
+ 145   5      }
+ 146   4      if(s1number==3)
+ 147   4      {
+ 148   5      shi++;
+ 149   5      if(shi==24)
+ 150   5      shi=0;
+ 151   5      write_sfm(4,shi);
+ 152   5      write_com(0x80+0x40+4);
+ 153   5      }
+ 154   4      }
+ 155   3      }
+ 156   2      if(key3==0)
+ 157   2      {
+ 158   3      delay_(5);
+ 159   3      if(key3==0)
+ 160   3      {
+ 161   4      while(!key3);
+ 162   4      if(s1number==1)
+ 163   4      {
+ 164   5      miao--;
+ 165   5      if(miao==-1)
+ 166   5      miao=59;
+ 167   5      write_sfm(10,miao);
+ 168   5      write_com(0x80+0x40+10);
+ 169   5      }
+ 170   4      if(s1number==2)
+ 171   4      {
+ 172   5      fen--;
+ 173   5      if(fen==-1)
+ 174   5      fen=59;
+ 175   5      write_sfm(7,fen);
+ 176   5      write_com(0x80+0x40+7);
+ 177   5      }
+ 178   4      if(s1number==3)
+ 179   4      {
+C51 COMPILER V9.01   TIMER                                                                 03/07/2021 22:34:35 PAGE 4   
+
+ 180   5      shi--;
+ 181   5      if(shi==-1)
+ 182   5      shi=23;
+ 183   5      write_sfm(4,shi);
+ 184   5      write_com(0x80+0x40+4);
+ 185   5      }
+ 186   4      }
+ 187   3      }
+ 188   2      }
+ 189   1      }
+ 190          
+ 191          void main()
+ 192          {
+ 193   1      init();
+ 194   1      while(1){
+ 195   2      keyscan_();
+ 196   2      if(shi==6&&fen==40&&miao==59)
+ 197   2      {
+ 198   3      uchar j;
+ 199   3        while(1)
+ 200   3        {
+ 201   4          for(j=200;j>0;j--)
+ 202   4              {
+ 203   5                BEEP=~BEEP;       //输出频率1KHz
+ 204   5                delay500();       //延时500us
+ 205   5              }
+ 206   4      
+ 207   4              for(j=200;j>0;j--)
+ 208   4              {
+ 209   5                BEEP=~BEEP;       //输出频率500Hz
+ 210   5                delay500();       //延时1ms
+ 211   5                delay500();
+ 212   5              }
+ 213   4        }
+ 214   3      
+ 215   3      }
+ 216   2      }
+ 217   1      
+ 218   1      }
+ 219          void timer0() interrupt 1
+ 220          {
+ 221   1      TH0=(65536-50000)/256;
+ 222   1      TL0=(65536-50000)%256;
+ 223   1      count++;
+ 224   1              if(count==18) 
+ 225   1      {
+ 226   2      count=0;
+ 227   2      miao++;
+ 228   2      if(miao==60)
+ 229   2      {
+ 230   3      miao=0;
+ 231   3      fen++;
+ 232   3      if(fen==60)
+ 233   3      {
+ 234   4      fen=0;
+ 235   4      shi++;
+ 236   4      if(shi==24)
+ 237   4      {
+ 238   5      shi=0;
+ 239   5      }
+ 240   4      write_sfm(4,shi);
+ 241   4      }
+C51 COMPILER V9.01   TIMER                                                                 03/07/2021 22:34:35 PAGE 5   
+
+ 242   3      write_sfm(7,fen);
+ 243   3      }
+ 244   2      write_sfm(10,miao);
+ 245   2      }
+ 246   1      }
+ 247          
+ 248          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    620    ----
+   CONSTANT SIZE    =     40    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      5       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

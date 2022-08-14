@@ -1,0 +1,93 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+D:\³ÌÐò´óÈ«\keilc51\EPROM.uvproj
+Project File Date:  03/06/2021
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling eprom.c...
+EPROM.C(30): error C202: 'i': undefined identifier
+EPROM.C(32): error C202: 'i': undefined identifier
+EPROM.C(33): error C202: 'i': undefined identifier
+EPROM.C(42): error C141: syntax error near ';'
+EPROM.C(44): error C202: 'i': undefined identifier
+EPROM.C(46): error C202: 'temp': undefined identifier
+EPROM.C(48): error C202: 'i': undefined identifier
+EPROM.C(50): error C202: 'temp': undefined identifier
+EPROM.C(62): error C202: 'i': undefined identifier
+EPROM.C(67): error C202: 'i': undefined identifier
+EPROM.C(71): error C202: 'j': undefined identifier
+EPROM.C(72): error C202: 'k': undefined identifier
+EPROM.C(76): error C202: 'k': undefined identifier
+EPROM.C(94): error C202: 'oxa1': undefined identifier
+Target not created
+Build target 'Target 1'
+compiling eprom.c...
+EPROM.C(30): error C141: syntax error near '='
+EPROM.C(30): error C202: 'i': undefined identifier
+EPROM.C(32): error C202: 'i': undefined identifier
+EPROM.C(33): error C202: 'i': undefined identifier
+EPROM.C(42): error C141: syntax error near ';'
+EPROM.C(44): error C202: 'i': undefined identifier
+EPROM.C(46): error C202: 'temp': undefined identifier
+EPROM.C(48): error C202: 'i': undefined identifier
+EPROM.C(50): error C202: 'temp': undefined identifier
+EPROM.C(62): error C202: 'i': undefined identifier
+EPROM.C(67): error C202: 'i': undefined identifier
+EPROM.C(71): error C202: 'j': undefined identifier
+EPROM.C(72): error C202: 'k': undefined identifier
+EPROM.C(76): error C202: 'k': undefined identifier
+EPROM.C(94): error C202: 'oxa1': undefined identifier
+Target not created
+Build target 'Target 1'
+compiling eprom.c...
+EPROM.C(30): error C141: syntax error near '='
+EPROM.C(30): error C202: 'i': undefined identifier
+EPROM.C(32): error C202: 'i': undefined identifier
+EPROM.C(33): error C202: 'i': undefined identifier
+EPROM.C(42): error C141: syntax error near ';'
+EPROM.C(44): error C202: 'i': undefined identifier
+EPROM.C(46): error C202: 'temp': undefined identifier
+EPROM.C(48): error C202: 'i': undefined identifier
+EPROM.C(50): error C202: 'temp': undefined identifier
+EPROM.C(62): error C202: 'i': undefined identifier
+EPROM.C(67): error C202: 'i': undefined identifier
+EPROM.C(71): error C202: 'j': undefined identifier
+EPROM.C(72): error C202: 'k': undefined identifier
+EPROM.C(76): error C202: 'a': undefined identifier
+Target not created
+Build target 'Target 1'
+compiling eprom.c...
+EPROM.C(30): error C202: 'i': undefined identifier
+EPROM.C(32): error C202: 'i': undefined identifier
+EPROM.C(33): error C202: 'i': undefined identifier
+EPROM.C(42): error C141: syntax error near ';'
+EPROM.C(44): error C202: 'i': undefined identifier
+EPROM.C(46): error C202: 'temp': undefined identifier
+EPROM.C(48): error C202: 'i': undefined identifier
+EPROM.C(50): error C202: 'temp': undefined identifier
+EPROM.C(62): error C202: 'i': undefined identifier
+EPROM.C(67): error C202: 'i': undefined identifier
+EPROM.C(71): error C202: 'j': undefined identifier
+EPROM.C(72): error C202: 'k': undefined identifier
+EPROM.C(76): error C202: 'a': undefined identifier
+Target not created
+Build target 'Target 1'
+compiling eprom.c...
+EPROM.C(30): error C202: 'i': undefined identifier
+EPROM.C(32): error C202: 'i': undefined identifier
+EPROM.C(33): error C202: 'i': undefined identifier
+EPROM.C(42): error C141: syntax error near ';'
+EPROM.C(44): error C202: 'i': undefined identifier
+EPROM.C(46): error C202: 'temp': undefined identifier
+EPROM.C(48): error C202: 'i': undefined identifier
+EPROM.C(50): error C202: 'temp': undefined identifier
+EPROM.C(62): error C202: 'i': undefined identifier
+EPROM.C(67): error C202: 'i': undefined identifier
+EPROM.C(71): error C202: 'j': undefined identifier
+EPROM.C(72): error C202: 'k': undefined identifier
+EPROM.C(76): error C202: 'a': undefined identifier
+Target not created

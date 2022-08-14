@@ -1,0 +1,221 @@
+C51 COMPILER V9.01   TEMPTURE                                                              03/16/2021 17:39:56 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE TEMPTURE
+OBJECT MODULE PLACED IN tempture.OBJ
+COMPILER INVOKED BY: C:\单片机\C51\BIN\C51.EXE tempture.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg52.h>
+   2          #define uchar unsigned char
+   3          #define uint unsigned int
+   4          uchar code table0[]="tempture:";
+   5          uchar code table1[]="    00.0";
+   6          uchar bai,shi,ge;//装三位温度
+   7          sbit  rs=P0^7;//LCD引脚定义
+   8          sbit rw=P0^6;
+   9          sbit en=P0^5;
+  10          sbit ds=P3^7;//温度传感器传输口
+  11          uchar i;
+  12          uint warnh=450; //警告温度*10；
+  13          uint warnl=110;//
+  14          
+  15          
+  16          void delay(uint k)//ms
+  17          {
+  18   1      uint x,y;
+  19   1      for(x=k;x>0;x--)
+  20   1      for(y=110;y>0;y--);
+  21   1      }
+  22          void write_com(uchar comand)//对LCD写指令
+  23          {
+  24   1      rw=0;
+  25   1      rs=0;
+  26   1      P2=comand;
+  27   1      delay(10);
+  28   1      en=1;
+  29   1      delay(10);
+  30   1      en=0;
+  31   1      }
+  32          void write_date(uchar date_)//对LCD写入数据
+  33          {
+  34   1      rw=0;
+  35   1      rs=1;
+  36   1      P2=date_;
+  37   1      delay(10);
+  38   1      en=1;
+  39   1      delay(10);
+  40   1      en=0;
+  41   1      }
+  42          void init()
+  43          {
+  44   1      rw=0;
+  45   1      en=0;
+  46   1      write_com(0x38);//16*2显示
+  47   1      write_com(0x0c);//无光标显示
+  48   1      write_com(0x06);
+  49   1      write_com(0x01);//清屏
+  50   1      write_com(0x80);//指向一排第一位
+  51   1      for(i=0;i<9;i++)  //初始显示
+  52   1      {
+  53   2      write_date(table0[i]);
+  54   2      delay(5);
+  55   2      }
+C51 COMPILER V9.01   TEMPTURE                                                              03/16/2021 17:39:56 PAGE 2   
+
+  56   1      write_com(0x80+0x40);//第二行开始显示
+  57   1      for(i=0;i<8;i++)
+  58   1      {
+  59   2      write_date(table1[i]);
+  60   2      delay(5);
+  61   2      }
+  62   1      
+  63   1      }
+  64          //DS18B20初始化
+  65          uchar begin()
+  66          {
+  67   1      ds=0;
+  68   1      i=70;
+  69   1      while(i--);
+  70   1      ds=1;
+  71   1      i=0;
+  72   1      while(ds)
+  73   1      {
+  74   2      delay(1);
+  75   2      i++;
+  76   2      if(i>5)//等待超过5毫秒
+  77   2      {
+  78   3      return 0;//初始化失败
+  79   3      }
+  80   2      else 
+  81   2      {
+  82   3      return 1;
+  83   3      }//初始化成功
+  84   2      }
+  85   1      }
+  86          //写时序
+  87          void write_type(uchar dat)
+  88          {
+  89   1      uint k,y;
+  90   1      for(y=0;y<8;y++)
+  91   1      {
+  92   2      ds=0;//每写一位拉低一微秒
+  93   2      k++;   
+  94   2      ds=dat&0x01;//写入低一位
+  95   2      k=6;//延时初值
+  96   2      while(i--);
+  97   2      ds=1;//释放总线
+  98   2      dat>>=1;//右移一位
+  99   2      }
+ 100   1      }
+ 101          //读时序
+ 102          uchar read_type()
+ 103          {
+ 104   1      uchar date,bi;
+ 105   1      uint x,y;
+ 106   1      for(x=8;x>0;x--)
+ 107   1      {
+ 108   2      ds=0;
+ 109   2      y++;
+ 110   2      ds=1;
+ 111   2      y++;
+ 112   2      y++;
+ 113   2      bi=ds;
+ 114   2      date=(date>>1)|(bi<<7);
+ 115   2      i=4;
+ 116   2      while(i--);
+ 117   2      }
+C51 COMPILER V9.01   TEMPTURE                                                              03/16/2021 17:39:56 PAGE 3   
+
+ 118   1      return date;
+ 119   1      }
+ 120          //转换温度指令
+ 121          void begintempturecom()
+ 122          {
+ 123   1      begin();//初始化
+ 124   1      delay(1);//延时
+ 125   1      write_type(0xcc);//一个直接忽略ROM地址
+ 126   1      write_type(0x44);
+ 127   1      //delay(100);
+ 128   1      }
+ 129          //读取温度命令
+ 130          void readtempturecom()
+ 131          {
+ 132   1      begin();
+ 133   1      delay(1);
+ 134   1      write_type(0xcc);
+ 135   1      write_type(0xbe);
+ 136   1      }
+ 137          //读取温度
+ 138          int read_tempture()
+ 139          {
+ 140   1      int temp=0;
+ 141   1      uchar tml,tmh;
+ 142   1      begintempturecom();
+ 143   1      readtempturecom();
+ 144   1      tml=read_type();//读取低八位
+ 145   1      tmh=read_type();//读取高八位
+ 146   1      temp=tmh;
+ 147   1      temp<<=8;
+ 148   1      temp=temp|tml;
+ 149   1      return temp;
+ 150   1      }
+ 151          void datapros(int temp)
+ 152          {
+ 153   1      float tp;
+ 154   1      if(temp<0)//温度为负时
+ 155   1      {
+ 156   2      write_com(0x80+0x40+3);//第二行起始第3个位置
+ 157   2      write_date('-');
+ 158   2      temp=temp-1;//温度为实际温度补码-1，再取反得原码
+ 159   2      temp=~temp;
+ 160   2      tp=temp;
+ 161   2      temp=tp*0.0625*10+0.5;//四舍五入，小数点后取一位故*10
+ 162   2      }
+ 163   1      else
+ 164   1      {
+ 165   2      tp=temp;
+ 166   2      temp=tp*0.0625*10+0.5;
+ 167   2      }
+ 168   1      bai=(temp/100);
+ 169   1      shi=(temp%100)/10;
+ 170   1      ge=temp%10;
+ 171   1      }
+ 172          void disply_()
+ 173          {
+ 174   1      write_com(0x80+0x40+5);
+ 175   1      write_date(bai);
+ 176   1      write_com(0x80+0x40+6);
+ 177   1      write_date(shi);
+ 178   1      write_com(0x80+0x40+8);
+ 179   1      write_date(ge);
+C51 COMPILER V9.01   TEMPTURE                                                              03/16/2021 17:39:56 PAGE 4   
+
+ 180   1      delay(5);
+ 181   1      } 
+ 182          
+ 183          void main()
+ 184          {
+ 185   1      init();
+ 186   1      while(1)
+ 187   1      {
+ 188   2      datapros(read_tempture);
+ 189   2      disply_();
+ 190   2      }
+ 191   1      }
+*** WARNING C291 IN LINE 85 OF TEMPTURE.C: not every exit path returns a value
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    556    ----
+   CONSTANT SIZE    =     19    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      8       8
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

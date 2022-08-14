@@ -1,0 +1,15 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+D:\程序大全\keilc51\数码管123....uvproj
+Project File Date:  03/02/2021
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling shuamaguan123.c...
+linking...
+Program Size: data=13.0 xdata=0 code=125
+creating hex file from "数码管123..."...
+"数码管123..." - 0 Error(s), 0 Warning(s).

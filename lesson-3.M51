@@ -1,0 +1,105 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        02/26/2021  17:27:54  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\单片机\C51\BIN\BL51.EXE lesson_301.obj TO lesson-3 RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  lesson_301.obj (LESSON_301)
+  C:\单片机\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  lesson-3 (LESSON_301)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0001H     UNIT         ?DT?LESSON_301
+            IDATA   0009H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0020H     UNIT         ?PR?MAIN?LESSON_301
+            CODE    0820H     001EH     UNIT         ?PR?_DELAY_?LESSON_301
+            CODE    083EH     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   lesson-3 (LESSON_301)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?LESSON_301
+
+?PR?MAIN?LESSON_301
+  +--> ?PR?_DELAY_?LESSON_301
+
+
+
+SYMBOL TABLE OF MODULE:  lesson-3 (LESSON_301)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        LESSON_301
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/26/2021  17:27:54  PAGE 2
+
+
+  B:00A0H.3       PUBLIC        beep
+  C:0800H         PUBLIC        main
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:0008H         PUBLIC        temp
+  D:00C8H         PUBLIC        T2CON
+  C:0820H         PUBLIC        _delay_
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          MAIN
+  C:0800H         LINE#         8
+  C:0800H         LINE#         9
+  C:0800H         LINE#         10
+  C:0803H         LINE#         11
+  C:0803H         LINE#         12
+  C:0803H         LINE#         13
+  C:0805H         LINE#         14
+  C:0808H         LINE#         15
+  C:0815H         LINE#         16
+  C:081CH         LINE#         17
+  C:081EH         LINE#         19
+  -------         ENDPROC       MAIN
+  -------         PROC          _DELAY_
+  D:0006H         SYMBOL        z
+  -------         DO            
+  D:0006H         SYMBOL        x
+  D:0004H         SYMBOL        y
+  -------         ENDDO         
+  C:0820H         LINE#         23
+  C:0820H         LINE#         24
+  C:0820H         LINE#         26
+  C:0829H         LINE#         27
+  C:083DH         LINE#         29
+  -------         ENDPROC       _DELAY_
+  -------         ENDMOD        LESSON_301
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 003EH BYTE ( 3%) *
+******************************************************************************
+
+Program Size: data=10.0 xdata=0 code=77
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

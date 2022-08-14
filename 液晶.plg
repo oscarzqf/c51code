@@ -1,0 +1,57 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+D:\³ÌÐò´óÈ«\keilc51\Òº¾§.uvproj
+Project File Date:  03/05/2021
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling lcd.c...
+LCD.C(23): error C141: syntax error near '}'
+Target not created
+Build target 'Target 1'
+compiling lcd.c...
+LCD.C(29): warning C206: 'wtite_com': missing function-prototype
+LCD.C(29): error C267: 'wtite_com': requires ANSI-style prototype
+Target not created
+Build target 'Target 1'
+compiling lcd.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_WRITE_DATE?LCD
+Program Size: data=9.0 xdata=0 code=102
+"Òº¾§" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling lcd.c...
+linking...
+Program Size: data=11.0 xdata=0 code=175
+"Òº¾§" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling lcd.c...
+linking...
+Program Size: data=11.0 xdata=0 code=175
+"Òº¾§" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling lcd.c...
+linking...
+Program Size: data=10.0 xdata=0 code=175
+"Òº¾§" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling lcd.c...
+LCD.C(30): warning C206: 'fot': missing function-prototype
+LCD.C(30): error C267: 'fot': requires ANSI-style prototype
+LCD.C(30): error C141: syntax error near ';'
+LCD.C(30): error C141: syntax error near ')'
+Target not created
+Build target 'Target 1'
+compiling lcd.c...
+linking...
+Program Size: data=10.0 xdata=0 code=217
+"Òº¾§" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling lcd.c...
+linking...
+Program Size: data=10.0 xdata=0 code=217
+"Òº¾§" - 0 Error(s), 0 Warning(s).

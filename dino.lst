@@ -1,0 +1,304 @@
+C51 COMPILER V9.01   DINO                                                                  04/21/2021 17:38:49 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE DINO
+OBJECT MODULE PLACED IN dino.obj
+COMPILER INVOKED BY: C:\µ¥Æ¬»ú\C51\BIN\C51.EXE OLED_Dino-master\dino.c BROWSE DEBUG OBJECTEXTEND PRINT(.\dino.lst) OBJEC
+                    -T(dino.obj)
+
+line level    source
+
+   1          #include "STC8G.h"
+   2          #include "OLED.h"
+*** WARNING C318 IN LINE 5 OF OLED_DINO-MASTER\I2C.H: can't open file 'stc8g.h'
+   3          #include "I2C.h"
+   4          #include "board.h"
+   5          
+   6          code unsigned char xx2[32] = {0,0,0,0,0,0,0,0,
+   7                                                                                                                                  2,3,4,5,6,7,8,9,
+   8                                                                                                                                  12,14,16,18,20,22,24,26,
+   9                                                                                                                                  30,32,34,36,36,36,36,36};
+  10          
+  11          code unsigned char Cactus_12_24[36] ={0xC0,0xC0,0x00,0x00,0xFE,0xFF,0xFF,0xFE,0x00,0xE0,0xE0,0xC0,0x1F,0x3
+             -F,0x60,0x60,
+  12                                                                                                                                                                  0xFF,0xFF,0xFF,0xFF,0x60,0x7F,0x3F,0x1F,0x00,0x00,0x00,0x00,0xFF,0xFF,0xFF,0xFF,
+  13                                                                                                                                                                  0x00,0x00,0x00,0x00};
+  14          
+  15          code unsigned char Cactus_8_16[2][8] = {0xF0,0xE0,0x00,0xFF,0xFF,0x80,0xFC,0x78,0x13,0x17,0x16,0xFF,0xFF,0
+             -x11,0x10,0x10};
+  16          
+  17                  
+  18          code unsigned char Dino[2][16] = {0x40,0xC0,0x80,0x00,0x00,0x80,0x80,0xC0,0xFE,0xFF,0xFD,0xBF,0xAF,0x2F,0x
+             -0E,0x0C,
+  19                                                                                                                                                  0x00,0x03,0x07,0x0F,0x1F,0xFF,0x9F,0x1F,0xFF,0x8F,0x07,0x00,0x01,0x00,0x00,0x00};
+  20          
+  21          unsigned long s = 0;                                                                                                                            
+  22          unsigned char dino_y = 0,speed = 15;
+  23                                                                                                                                                  
+  24          short xr[4] = {100,150,200,250};
+  25          
+  26          void OLED_Display_Dino(char y)
+  27          {
+  28   1              char y_line=0,y_mode =0,i,j;
+  29   1              
+  30   1              y_line = 6 - y/8;
+  31   1              y_mode = y%8;
+  32   1              
+  33   1              for(i=0; i<6; i++)
+  34   1              {
+  35   2                      OLED_Set_Pos(0, i);
+  36   2                      for(j=0; j<16; j++)
+  37   2                      {
+  38   3                              OLED_Write_Byte(0, isData);
+  39   3                      }
+  40   2              }
+  41   1              
+  42   1              if(y_mode) 
+  43   1              {
+  44   2                      y_line--;
+  45   2                      
+  46   2                      OLED_Set_Pos(0, y_line);
+  47   2                      for(i=0; i<16; i++)
+  48   2                      {
+  49   3                              OLED_Write_Byte((Dino[0][i]  << (8-y_mode)), isData);
+  50   3                      }
+C51 COMPILER V9.01   DINO                                                                  04/21/2021 17:38:49 PAGE 2   
+
+  51   2                      
+  52   2                      OLED_Set_Pos(0, y_line+1);
+  53   2                      for(i=0; i<16; i++)
+  54   2                      {
+  55   3                              OLED_Write_Byte((Dino[0][i]  >> (y_mode)) | (Dino[1][i]  << (8-y_mode)) , isData);
+  56   3                      }
+  57   2                      
+  58   2                      OLED_Set_Pos(0, y_line+2);
+  59   2                      for(i=0; i<16; i++)
+  60   2                      {
+  61   3                              OLED_Write_Byte((Dino[1][i]  >> y_mode), isData);
+  62   3                      }
+  63   2              }
+  64   1              else
+  65   1              {
+  66   2                      OLED_Set_Pos(0, y_line);
+  67   2                      for(i=0; i<16; i++)
+  68   2                      {
+  69   3                              OLED_Write_Byte(Dino[0][i], isData);
+  70   3                      }
+  71   2                      
+  72   2                      OLED_Set_Pos(0, y_line+1);
+  73   2                      
+  74   2                      for(i=0; i<16; i++)
+  75   2                      {
+  76   3                              OLED_Write_Byte(Dino[1][i], isData);
+  77   3                      }
+  78   2              }
+  79   1      }
+  80          
+  81          
+  82          void OLED_Display_Cactus(short x)
+  83          {
+  84   1              char start=0,end=8,i;
+  85   1              
+  86   1              if(x < 0)
+  87   1              {               
+  88   2                      start = 0-x;
+  89   2                      x=0;
+  90   2              }
+  91   1              if(x > 120) end = 128 - x;
+  92   1              
+  93   1              OLED_Set_Pos(x, 6);
+  94   1              for(i=start; i<end; i++)
+  95   1              {
+  96   2                      OLED_Write_Byte(Cactus_8_16[0][i], isData);
+  97   2              }
+  98   1              
+  99   1              OLED_Set_Pos(x, 7);
+ 100   1              for(i=start; i<end; i++)
+ 101   1              {
+ 102   2                      OLED_Write_Byte(Cactus_8_16[1][i], isData);
+ 103   2              }
+ 104   1      }
+ 105          
+ 106          void OLED_Line(unsigned char start, unsigned char len)
+ 107          {
+ 108   1                      unsigned char tmp;
+ 109   1              
+ 110   1                      if(start >127) return;
+ 111   1              
+ 112   1                      if((start + len) > 128)
+C51 COMPILER V9.01   DINO                                                                  04/21/2021 17:38:49 PAGE 3   
+
+ 113   1                      {
+ 114   2                              tmp = 128 - start;
+ 115   2                      }
+ 116   1                      else
+ 117   1                      {
+ 118   2                              tmp=len;
+ 119   2                      }
+ 120   1      
+ 121   1          OLED_Set_Pos(start, 6);
+ 122   1                      len = tmp;
+ 123   1                      while(len--)OLED_Write_Byte(0x00, isData);
+ 124   1              
+ 125   1                      len = tmp;
+ 126   1                      OLED_Set_Pos(start, 7);
+ 127   1                      while(len--)OLED_Write_Byte(0x10, isData);
+ 128   1      }
+ 129          
+ 130          void Dino_Tick(void)
+ 131          {
+ 132   1              static char jump = 1,cc = 0,dd =0;
+ 133   1              cc ++; dd++;
+ 134   1              
+ 135   1              if((SW5 == 0) && (jump))
+ 136   1              {
+ 137   2                              if(cc > xx2[dino_y])
+ 138   2                              {
+ 139   3                                      cc=0;
+ 140   3                                      dino_y++;
+ 141   3                                      if(dino_y == 30) jump =0;
+ 142   3                              }
+ 143   2              }
+ 144   1              else
+ 145   1              {
+ 146   2                      jump = 0;
+ 147   2                      if(cc > xx2[dino_y])
+ 148   2                      {
+ 149   3                              cc=0;
+ 150   3                              if(dino_y)dino_y--;
+ 151   3                              
+ 152   3                              if((dino_y==0) && (SW5)) jump =1;
+ 153   3                      }
+ 154   2              }
+ 155   1      
+ 156   1              if(dd == speed)
+ 157   1              {
+ 158   2                      LED0 =~LED0;
+ 159   2                      dd=0;
+ 160   2                      xr[0]--;
+ 161   2                      xr[1]--;
+ 162   2                      xr[2]--;
+ 163   2                      xr[3]--;
+ 164   2                      
+ 165   2                      if(xr[0] < -5)
+ 166   2                      {
+ 167   3                              xr[0] = xr[1];
+ 168   3                              xr[1] = xr[2];
+ 169   3                              xr[2] = xr[3];
+ 170   3                              
+ 171   3                              xr[3] = xr[3] +50 + Ramod(50);
+ 172   3                      }
+ 173   2                      s++;
+ 174   2              }
+C51 COMPILER V9.01   DINO                                                                  04/21/2021 17:38:49 PAGE 4   
+
+ 175   1      }
+ 176          
+ 177          void game_over(void)
+ 178          {
+ 179   1              
+ 180   1              OLED_DisplayStr(35,3,"GAME OVER!");
+ 181   1              ET0=0;
+ 182   1              s=0;
+ 183   1              Delay_ms(1000);
+ 184   1              while(1)
+ 185   1              {
+ 186   2                      if(SW5 == 0) 
+ 187   2                      {
+ 188   3                              OLED_Fill(0x00);
+ 189   3                              xr[0] = 100;
+ 190   3                              xr[1] = 150;
+ 191   3                              xr[2] = 200;
+ 192   3                              xr[3] = 250;
+ 193   3                              ET0=1;
+ 194   3                              break;
+ 195   3                      }
+ 196   2              }
+ 197   1      }
+ 198          void Dino_Start(void)
+ 199          {
+ 200   1                      short i = 0;    
+ 201   1                      unsigned char ss[8] = 0,c_t,d_t,l_t;
+ 202   1              
+ 203   1          while (1)
+ 204   1          {
+ 205   2                              if((xr[0] > 0) && (dino_y > 4))
+ 206   2                              {
+ 207   3                                      OLED_Line(0, xr[0]);
+ 208   3                              }
+ 209   2                              
+ 210   2                              for(i=0; i<3; i++)
+ 211   2                              {
+ 212   3                                      if(i==1) OLED_Display_Dino(dino_y);
+ 213   3                                      
+ 214   3                                      if(xr[i] < 126) 
+ 215   3                                      {
+ 216   4                                              OLED_Display_Cactus(xr[i]);
+ 217   4                                              OLED_Line(xr[i] + 8, xr[i+1] - xr[i]);
+ 218   4                                      }
+ 219   3                              }
+ 220   2                              
+ 221   2                              if((xr[0] < 16) && ( dino_y < 16))
+ 222   2                              {
+ 223   3                                      if(xr[0] > 0)
+ 224   3                                      {
+ 225   4                                              c_t = 0;
+ 226   4                                              d_t = xr[0];
+ 227   4                                              l_t = 16 - xr[0];
+ 228   4                                      }
+ 229   3                                      else
+ 230   3                                      {
+ 231   4                                              c_t = 0 - xr[0];
+ 232   4                                              d_t = 0;
+ 233   4                                              l_t = 8 + xr[0];
+ 234   4                                      }
+ 235   3                                      
+ 236   3                                      while(l_t--)
+C51 COMPILER V9.01   DINO                                                                  04/21/2021 17:38:49 PAGE 5   
+
+ 237   3                                      {
+ 238   4                                              if(dino_y > 8)
+ 239   4                                              {
+ 240   5                                                      if(Cactus_8_16[0][c_t] & (Dino[1][d_t] >> (dino_y - 8))) game_over();
+ 241   5                                              }
+ 242   4                                              else
+ 243   4                                              {
+ 244   5                                                      if(Cactus_8_16[0][c_t] & ((Dino[0][d_t]  >> (dino_y)) | (Dino[1][d_t]  << (8-dino_y)) ))game_over();
+ 245   5                                              }
+ 246   4                                              c_t++;d_t++;
+ 247   4                                      }
+ 248   3                              }
+ 249   2                              
+ 250   2                              ss[5] = 'm';
+ 251   2                              ss[4] = 'K';
+ 252   2                              ss[3] = (s/100)%10+48;
+ 253   2                              ss[2] = (s/1000)%10+48;
+ 254   2                              ss[1] = (s/10000)%10+48;
+ 255   2                              ss[0] = (s/100000)%10+48;
+ 256   2                              OLED_DisplayStr(92,0,ss);
+ 257   2                              
+ 258   2                              if(s>80000) speed = 7;
+ 259   2                              else if(s>70000) speed = 8;
+ 260   2                              else if(s>60000) speed = 9;
+ 261   2                              else if(s>50000) speed = 10;
+ 262   2                              else if(s>40000) speed = 11;
+ 263   2                              else if(s>30000) speed = 12;
+ 264   2                              else if(s>20000) speed = 13;
+ 265   2                              else if(s>10000) speed = 14;
+ 266   2                              Delay_ms(10);
+ 267   2          }
+ 268   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1600    ----
+   CONSTANT SIZE    =    135    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     17      25
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

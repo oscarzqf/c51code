@@ -1,0 +1,55 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+D:\³ÌÐò´óÈ«\keilc51\DAClesson6.uvproj
+Project File Date:  02/28/2021
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling DAC.c...
+DAC.C(8): error C141: syntax error near 'xff'
+DAC.C(8): error C202: 'xff': undefined identifier
+Target not created
+Build target 'Target 1'
+compiling DAC.c...
+linking...
+Program Size: data=9.0 xdata=0 code=24
+"DAClesson6" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling DAC.c...
+linking...
+Program Size: data=9.0 xdata=0 code=25
+"DAClesson6" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling DAC.c...
+linking...
+Program Size: data=9.0 xdata=0 code=25
+"DAClesson6" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling DAC.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?INIT?DAC
+Program Size: data=11.0 xdata=0 code=69
+"DAClesson6" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling DAC.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?INIT?DAC
+Program Size: data=11.0 xdata=0 code=72
+"DAClesson6" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling DAC.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?INIT?DAC
+Program Size: data=11.0 xdata=0 code=72
+"DAClesson6" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling DAC.c...
+linking...
+Program Size: data=11.0 xdata=0 code=75
+"DAClesson6" - 0 Error(s), 0 Warning(s).

@@ -1,0 +1,138 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        03/02/2021  20:57:26  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\单片机\C51\BIN\BL51.EXE shuamaguan123.obj TO 数码管123... RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  shuamaguan123.obj (SHUAMAGUAN123)
+  C:\单片机\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  数码管123... (SHUAMAGUAN123)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0004H     UNIT         ?DT?SHUAMAGUAN123
+            IDATA   000CH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+                    000EH     07F2H                  *** GAP ***
+            CODE    0800H     004CH     UNIT         ?PR?MAIN?SHUAMAGUAN123
+            CODE    084CH     0016H     UNIT         ?CO?SHUAMAGUAN123
+            CODE    0862H     000CH     UNIT         ?C_C51STARTUP
+            CODE    086EH     0009H     UNIT         ?PR?TIMER?SHUAMAGUAN123
+
+
+
+OVERLAY MAP OF MODULE:   数码管123... (SHUAMAGUAN123)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?SHUAMAGUAN123
+
+?PR?MAIN?SHUAMAGUAN123
+  +--> ?CO?SHUAMAGUAN123
+
+
+
+SYMBOL TABLE OF MODULE:  数码管123... (SHUAMAGUAN123)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        SHUAMAGUAN123
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+BL51 BANKED LINKER/LOCATER V6.22                                                      03/02/2021  20:57:26  PAGE 2
+
+
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  C:086EH         PUBLIC        timer
+  C:0800H         PUBLIC        main
+  B:00A0H.6       PUBLIC        dula
+  B:00A0H.7       PUBLIC        wela
+  D:0008H         PUBLIC        numdu
+  D:0009H         PUBLIC        numwe
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  D:000AH         PUBLIC        temp
+  D:000BH         PUBLIC        aa
+  B:00A8H.1       PUBLIC        ET0
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  B:0088H.4       PUBLIC        TR0
+  C:084CH         PUBLIC        tabledu
+  D:00C8H         PUBLIC        T2CON
+  C:085CH         PUBLIC        tablewe
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          MAIN
+  C:0800H         LINE#         15
+  C:0800H         LINE#         16
+  C:0800H         LINE#         17
+  C:0803H         LINE#         18
+  C:0805H         LINE#         19
+  C:0807H         LINE#         20
+  C:080AH         LINE#         21
+  C:080DH         LINE#         22
+  C:0810H         LINE#         23
+  C:0812H         LINE#         24
+  C:0814H         LINE#         25
+  C:0816H         LINE#         26
+  C:0816H         LINE#         27
+  C:0816H         LINE#         28
+  C:081BH         LINE#         29
+  C:081BH         LINE#         30
+  C:081EH         LINE#         31
+  C:0820H         LINE#         32
+  C:0828H         LINE#         33
+  C:082AH         LINE#         34
+  C:082CH         LINE#         35
+  C:0831H         LINE#         36
+  C:0834H         LINE#         37
+  C:0836H         LINE#         38
+  C:083EH         LINE#         39
+  C:0840H         LINE#         40
+  C:0842H         LINE#         41
+  C:0847H         LINE#         42
+  C:084AH         LINE#         43
+  C:084AH         LINE#         45
+  -------         ENDPROC       MAIN
+  -------         PROC          TIMER
+BL51 BANKED LINKER/LOCATER V6.22                                                      03/02/2021  20:57:26  PAGE 3
+
+
+  C:086EH         LINE#         50
+  C:086EH         LINE#         52
+  C:0871H         LINE#         53
+  C:0874H         LINE#         54
+  C:0876H         LINE#         55
+  -------         ENDPROC       TIMER
+  -------         ENDMOD        SHUAMAGUAN123
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 006EH BYTE ( 5%) *
+******************************************************************************
+
+Program Size: data=13.0 xdata=0 code=125
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

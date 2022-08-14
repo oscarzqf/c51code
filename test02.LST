@@ -1,0 +1,81 @@
+C51 COMPILER V9.01   TEST02                                                                03/07/2021 15:01:12 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE TEST02
+OBJECT MODULE PLACED IN test02.OBJ
+COMPILER INVOKED BY: C:\单片机\C51\BIN\C51.EXE test02.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <reg52.h>
+   2          #define uchar unsigned char 
+   3          sbit P2_0 = P2^0;
+   4          sbit P2_1 = P2^1;
+   5          sbit P2_2 = P2^2;
+   6          sbit P2_3 = P2^3;
+   7          
+   8          uchar code table[]={0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,
+   9                                  0xf8,0x80,0x90};
+  10          void delay(uchar i)
+  11          {
+  12   1        uchar j,k; 
+  13   1        for(j=i;j>0;j--)
+  14   1          for(k=125;k>0;k--);
+  15   1      }
+  16          
+  17          void display()
+  18          {
+  19   1        
+  20   1         P0=table[0];
+  21   1         P2_0 = 0;
+  22   1         delay(5);
+  23   1         P2_0 = 1;
+  24   1      
+  25   1         P0=table[1];
+  26   1         P2_1 = 0;
+  27   1         delay(5);
+  28   1         P2_1 = 1;
+  29   1      
+  30   1         P0=table[2];
+  31   1         P2_2 = 0;
+  32   1         delay(5);
+  33   1         P2_2 = 1;
+  34   1      
+  35   1          P0=table[3];
+  36   1         P2_3 = 0;
+  37   1         delay(5);
+  38   1         P2_3 = 1;
+  39   1         
+  40   1      }
+  41          
+  42          /*演示主程序*/
+  43          void main(void)
+  44          {
+  45   1          unsigned int  a;
+  46   1         
+  47   1       while(1)
+  48   1       {
+  49   2       
+  50   2         for(a=100;a>0;a--)
+  51   2         {
+  52   3           display();
+  53   3         }
+  54   2       
+  55   2       }
+C51 COMPILER V9.01   TEST02                                                                03/07/2021 15:01:12 PAGE 2   
+
+  56   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     91    ----
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

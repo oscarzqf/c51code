@@ -1,0 +1,80 @@
+C51 COMPILER V9.01   SHUAMAGUAN123                                                         03/02/2021 20:57:25 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE SHUAMAGUAN123
+OBJECT MODULE PLACED IN shuamaguan123.OBJ
+COMPILER INVOKED BY: C:\µ¥Æ¬»ú\C51\BIN\C51.EXE shuamaguan123.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg52.h>
+   2          #include<intrins.h>
+   3          #define uint unsigned int
+   4          #define uchar unsigned char
+   5          uchar temp,numdu,aa,numwe;
+   6          sbit dula=P2^6;
+   7          sbit wela=P2^7;
+   8          uchar code tabledu[]={  0x3f,0x06,0x5b,0x4f,
+   9                                                    0x66,0x6d,0x7d,0x07,
+  10                                                    0x7f,0x6f,0x77,0x7c,
+  11                                                    0x39,0x5e,0x79,0x71};
+  12          uchar code tablewe[]={ 
+  13                                                          0xfe,0xfd,0xfb,0xf7,0xef,0xdf
+  14                                                  }  ;
+  15          void main()
+  16          {
+  17   1      aa=0;
+  18   1      numwe=0;
+  19   1      numdu=0;
+  20   1      TMOD=0x01;
+  21   1      TH0=(65556-50000)/256;
+  22   1      TL0=(65556-50000)%256;
+  23   1      EA=1;
+  24   1      ET0=1;
+  25   1      TR0=1;
+  26   1      while(1)
+  27   1      {
+  28   2              if(aa==20)
+  29   2      {
+  30   3      aa=0;
+  31   3      dula=1;
+  32   3      P0=tabledu[numdu];
+  33   3      dula=0;
+  34   3      numdu++;
+  35   3      if(numdu==8)
+  36   3      numdu=0;
+  37   3      wela=1;
+  38   3      P0=tablewe[numwe];
+  39   3      wela=0;
+  40   3      numwe++;
+  41   3      if(numwe==6)
+  42   3      numwe=0;
+  43   3      }
+  44   2      
+  45   2      }
+  46   1      
+  47   1      
+  48   1      }
+  49          
+  50          void timer() interrupt 1
+  51          {
+  52   1      TH0=(65556-50000)/256;
+  53   1      TL0=(65556-50000)%256;
+  54   1      aa++;
+  55   1      }
+C51 COMPILER V9.01   SHUAMAGUAN123                                                         03/02/2021 20:57:25 PAGE 2   
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     85    ----
+   CONSTANT SIZE    =     22    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

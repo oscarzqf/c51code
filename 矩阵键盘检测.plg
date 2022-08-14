@@ -1,0 +1,39 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+D:\≥Ã–Ú¥Û»´\keilc51\æÿ’Ûº¸≈ÃºÏ≤‚.uvproj
+Project File Date:  02/27/2021
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling juzhengboard.c...
+JUZHENGBOARD.C(22): error C141: syntax error near '!'
+JUZHENGBOARD.C(22): error C141: syntax error near ')'
+JUZHENGBOARD.C(27): error C202: 'oxf0': undefined identifier
+Target not created
+Build target 'Target 1'
+compiling juzhengboard.c...
+JUZHENGBOARD.C(27): error C202: 'oxf0': undefined identifier
+Target not created
+Build target 'Target 1'
+compiling juzhengboard.c...
+JUZHENGBOARD.C(29): warning C206: 'seitch': missing function-prototype
+JUZHENGBOARD.C(29): error C267: 'seitch': requires ANSI-style prototype
+JUZHENGBOARD.C(30): error C141: syntax error near '{'
+JUZHENGBOARD.C(31): error C172: 'case': missing enclosing switch
+JUZHENGBOARD.C(32): error C172: 'case': missing enclosing switch
+JUZHENGBOARD.C(33): error C172: 'case': missing enclosing switch
+JUZHENGBOARD.C(34): error C172: 'case': missing enclosing switch
+Target not created
+Build target 'Target 1'
+compiling juzhengboard.c...
+linking...
+Program Size: data=11.0 xdata=0 code=154
+"æÿ’Ûº¸≈ÃºÏ≤‚" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling juzhengboard.c...
+linking...
+Program Size: data=11.0 xdata=0 code=152
+"æÿ’Ûº¸≈ÃºÏ≤‚" - 0 Error(s), 0 Warning(s).

@@ -1,0 +1,291 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        03/06/2021  16:48:40  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\单片机\C51\BIN\BL51.EXE staret.obj TO bvgs RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  staret.obj (STARET)
+  C:\单片机\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  bvgs (STARET)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0025H     UNIT         ?PR?READ_BYTE?STARET
+            CODE    0825H     0020H     UNIT         ?PR?RESPONSE?STARET
+            CODE    0845H     001EH     UNIT         ?PR?_DELAY1?STARET
+            CODE    0863H     001BH     UNIT         ?PR?_WRITE_BYTE?STARET
+            CODE    087EH     001AH     UNIT         ?PR?MAIN?STARET
+            CODE    0898H     0019H     UNIT         ?PR?_READ_ADD?STARET
+            CODE    08B1H     0015H     UNIT         ?PR?_WRITE_ADD?STARET
+            CODE    08C6H     000CH     UNIT         ?C_C51STARTUP
+            CODE    08D2H     000AH     UNIT         ?PR?START?STARET
+            CODE    08DCH     000AH     UNIT         ?PR?STOP?STARET
+            CODE    08E6H     0006H     UNIT         ?PR?DELAY?STARET
+            CODE    08ECH     0005H     UNIT         ?PR?INIT?STARET
+
+
+
+OVERLAY MAP OF MODULE:   bvgs (STARET)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?STARET
+
+?PR?MAIN?STARET
+  +--> ?PR?INIT?STARET
+  +--> ?PR?_WRITE_ADD?STARET
+  +--> ?PR?_DELAY1?STARET
+  +--> ?PR?_READ_ADD?STARET
+
+?PR?_WRITE_ADD?STARET
+  +--> ?PR?START?STARET
+  +--> ?PR?_WRITE_BYTE?STARET
+BL51 BANKED LINKER/LOCATER V6.22                                                      03/06/2021  16:48:40  PAGE 2
+
+
+  +--> ?PR?RESPONSE?STARET
+  +--> ?PR?STOP?STARET
+
+?PR?START?STARET
+  +--> ?PR?DELAY?STARET
+
+?PR?_WRITE_BYTE?STARET
+  +--> ?PR?DELAY?STARET
+
+?PR?RESPONSE?STARET
+  +--> ?PR?_WRITE_BYTE?STARET
+  +--> ?PR?DELAY?STARET
+
+?PR?STOP?STARET
+  +--> ?PR?DELAY?STARET
+
+?PR?_READ_ADD?STARET
+  +--> ?PR?START?STARET
+  +--> ?PR?RESPONSE?STARET
+  +--> ?PR?_WRITE_BYTE?STARET
+  +--> ?PR?READ_BYTE?STARET
+  +--> ?PR?STOP?STARET
+
+?PR?READ_BYTE?STARET
+  +--> ?PR?DELAY?STARET
+
+
+
+SYMBOL TABLE OF MODULE:  bvgs (STARET)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        STARET
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  C:08EBH         PUBLIC        delay
+  D:00B8H         PUBLIC        IP
+  B:00D0H.7       PUBLIC        CY
+  C:087EH         PUBLIC        main
+  C:0898H         PUBLIC        _read_add
+  C:08D2H         PUBLIC        start
+  D:0098H         PUBLIC        SCON
+  C:0800H         PUBLIC        read_byte
+  D:0088H         PUBLIC        TCON
+  C:08ECH         PUBLIC        init
+  C:08B1H         PUBLIC        _write_add
+  B:00A0H.0       PUBLIC        sda
+  C:0845H         PUBLIC        _delay1
+  B:00A0H.1       PUBLIC        scl
+  C:0863H         PUBLIC        _write_byte
+  C:08DCH         PUBLIC        stop
+  D:00C8H         PUBLIC        T2CON
+  C:0830H         PUBLIC        response
+BL51 BANKED LINKER/LOCATER V6.22                                                      03/06/2021  16:48:40  PAGE 3
+
+
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          _DELAY1
+  D:0006H         SYMBOL        z
+  -------         DO            
+  D:0006H         SYMBOL        x
+  D:0004H         SYMBOL        y
+  -------         ENDDO         
+  C:0845H         LINE#         6
+  C:0845H         LINE#         7
+  C:0845H         LINE#         9
+  C:084EH         LINE#         10
+  C:0862H         LINE#         12
+  -------         ENDPROC       _DELAY1
+  C:08E6H         SYMBOL        L?0032
+  -------         PROC          L?0031
+  -------         ENDPROC       L?0031
+  C:08E6H         SYMBOL        L?0032
+  -------         PROC          DELAY
+  C:08EBH         LINE#         13
+  C:08EBH         LINE#         14
+  C:08EBH         LINE#         16
+  -------         ENDPROC       DELAY
+  -------         PROC          START
+  C:08D2H         LINE#         17
+  C:08D2H         LINE#         18
+  C:08D2H         LINE#         19
+  C:08D4H         LINE#         20
+  C:08D4H         LINE#         21
+  C:08D4H         LINE#         22
+  C:08D7H         LINE#         23
+  C:08D9H         LINE#         24
+  -------         ENDPROC       START
+  -------         PROC          STOP
+  C:08DCH         LINE#         26
+  C:08DCH         LINE#         27
+  C:08DCH         LINE#         28
+  C:08DEH         LINE#         29
+  C:08DEH         LINE#         30
+  C:08DEH         LINE#         31
+  C:08E1H         LINE#         32
+  C:08E3H         LINE#         33
+  -------         ENDPROC       STOP
+  -------         PROC          L?0030
+  -------         ENDPROC       L?0030
+  -------         PROC          RESPONSE
+  -------         DO            
+  D:0007H         SYMBOL        i
+  -------         ENDDO         
+  C:0830H         LINE#         35
+  C:0830H         LINE#         36
+  C:0830H         LINE#         37
+  C:0832H         LINE#         38
+  C:0834H         LINE#         39
+  C:083DH         LINE#         40
+  C:0840H         LINE#         41
+  C:0842H         LINE#         42
+  -------         ENDPROC       RESPONSE
+BL51 BANKED LINKER/LOCATER V6.22                                                      03/06/2021  16:48:40  PAGE 4
+
+
+  -------         PROC          INIT
+  C:08ECH         LINE#         44
+  C:08ECH         LINE#         45
+  C:08ECH         LINE#         46
+  C:08EEH         LINE#         47
+  C:08F0H         LINE#         48
+  -------         ENDPROC       INIT
+  -------         PROC          _WRITE_BYTE
+  D:0007H         SYMBOL        date
+  -------         DO            
+  D:0006H         SYMBOL        i
+  D:0007H         SYMBOL        temp
+  -------         ENDDO         
+  C:0863H         LINE#         49
+  C:0863H         LINE#         50
+  C:0863H         LINE#         52
+  C:0865H         LINE#         53
+  C:0865H         LINE#         54
+  C:0868H         LINE#         55
+  C:086AH         LINE#         56
+  C:086AH         LINE#         57
+  C:086EH         LINE#         58
+  C:0870H         LINE#         59
+  C:0870H         LINE#         60
+  C:0870H         LINE#         61
+  C:0873H         LINE#         62
+  C:0875H         LINE#         63
+  C:0879H         LINE#         64
+  C:087BH         LINE#         65
+  -------         ENDPROC       _WRITE_BYTE
+  -------         PROC          READ_BYTE
+  -------         DO            
+  D:0006H         SYMBOL        i
+  D:0005H         SYMBOL        j
+  D:0007H         SYMBOL        k
+  -------         ENDDO         
+  C:0800H         LINE#         67
+  C:0800H         LINE#         68
+  C:0800H         LINE#         70
+  C:0802H         LINE#         71
+  C:0805H         LINE#         72
+  C:0807H         LINE#         73
+  C:080AH         LINE#         74
+  C:080CH         LINE#         75
+  C:080CH         LINE#         76
+  C:080EH         LINE#         77
+  C:0811H         LINE#         78
+  C:0816H         LINE#         79
+  C:081BH         LINE#         80
+  C:081DH         LINE#         81
+  C:0820H         LINE#         82
+  C:0824H         LINE#         83
+  C:0824H         LINE#         84
+  -------         ENDPROC       READ_BYTE
+  -------         PROC          _WRITE_ADD
+  D:0004H         SYMBOL        adress
+  D:0005H         SYMBOL        date
+BL51 BANKED LINKER/LOCATER V6.22                                                      03/06/2021  16:48:40  PAGE 5
+
+
+  C:08B1H         LINE#         85
+  C:08B3H         LINE#         86
+  C:08B3H         LINE#         87
+  C:08B6H         LINE#         88
+  C:08BBH         LINE#         89
+  C:08BEH         LINE#         90
+  C:08C0H         LINE#         91
+  C:08C0H         LINE#         92
+  C:08C0H         LINE#         93
+  C:08C3H         LINE#         94
+  -------         ENDPROC       _WRITE_ADD
+  -------         PROC          _READ_ADD
+  D:0005H         SYMBOL        address
+  -------         DO            
+  D:0007H         SYMBOL        date
+  -------         ENDDO         
+  C:0898H         LINE#         96
+  C:089AH         LINE#         97
+  C:089AH         LINE#         99
+  C:089DH         LINE#         100
+  C:089FH         LINE#         101
+  C:089FH         LINE#         102
+  C:089FH         LINE#         103
+  C:08A2H         LINE#         104
+  C:08A7H         LINE#         105
+  C:08AAH         LINE#         106
+  C:08ADH         LINE#         107
+  C:08B0H         LINE#         108
+  C:08B0H         LINE#         109
+  -------         ENDPROC       _READ_ADD
+  -------         PROC          MAIN
+  C:087EH         LINE#         110
+  C:087EH         LINE#         111
+  C:087EH         LINE#         112
+  C:0881H         LINE#         113
+  C:0888H         LINE#         114
+  C:088FH         LINE#         115
+  C:0896H         LINE#         116
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        STARET
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 00E5H BYTE (11%) *
+******************************************************************************
+
+Program Size: data=9.0 xdata=0 code=244
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,97 @@
+C51 COMPILER V9.01   LCD                                                                   03/05/2021 21:59:10 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE LCD
+OBJECT MODULE PLACED IN lcd.OBJ
+COMPILER INVOKED BY: C:\单片机\C51\BIN\C51.EXE lcd.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //整屏左移
+   2          #include<reg52.h>
+   3          #define uchar unsigned char
+   4          #define uint unsigned int
+   5          uchar code table[]={"I love you!"};
+   6          uchar code table1[]={"I love study!"};
+   7          void delay(uint);
+   8          void init();
+   9          uchar i;
+  10          void write_com(uchar com_);
+  11          void write_date(uchar date);
+  12          sbit lcden=P3^4;
+  13          sbit lcdrs=P3^5;
+  14          sbit dula=P2^6;
+  15          sbit  wela=P2^7;
+  16          void main()
+  17          {
+  18   1      init();
+  19   1      for(i=0;i<11;i++)
+  20   1      {
+  21   2      write_date(table[i]);
+  22   2      delay(5);
+  23   2      }
+  24   1      write_com(0x80+0x53);//第二行屏外第三位开始写
+  25   1      for(i=0;i<13;i++)
+  26   1      {
+  27   2      write_date(table1[i]);
+  28   2      delay(5);
+  29   2      }
+  30   1      for(i=0;i<16;i++)
+  31   1      {
+  32   2      write_com(0x18);
+  33   2      delay(200);
+  34   2      }
+  35   1      while(1);
+  36   1      
+  37   1      }
+  38          void delay(uint z)
+  39          {
+  40   1       uint x,y;
+  41   1       for(x=z;x>0;x--)
+  42   1       for(y=110;y>0;y++); 
+  43   1      }
+  44          void init()
+  45          {
+  46   1      dula=0;
+  47   1      wela=0;
+  48   1      lcden=0; //使能信号起始为低
+  49   1      write_com(0x38);//模式
+  50   1      write_com(0x04);          //开显示，光标
+  51   1      write_com(0x06);//顺写
+  52   1      write_com(0x01);//数据指针清零，清屏
+  53   1      write_com(0x80+0x10);//指针指向第一行屏外
+  54   1      }
+  55          void write_com(uchar com_) //送指令函数
+C51 COMPILER V9.01   LCD                                                                   03/05/2021 21:59:10 PAGE 2   
+
+  56          {
+  57   1      lcdrs=0;//上电时为1,0开启指令
+  58   1      P0=com_;
+  59   1      delay(5);
+  60   1      lcden=1; //高脉冲读指令
+  61   1      delay(5);
+  62   1      lcden=0;
+  63   1      }
+  64          void write_date(uchar date)//写数据函数
+  65          {
+  66   1      lcdrs=1;
+  67   1      P0=date;
+  68   1      delay(5);
+  69   1      lcden=1; //高脉冲读数据
+  70   1      delay(5);
+  71   1      lcden=0;
+  72   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    176    ----
+   CONSTANT SIZE    =     26    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,114 @@
+C51 COMPILER V9.01   SMART_CAR_2_0_                                                        03/26/2021 20:14:03 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE SMART_CAR_2_0_
+OBJECT MODULE PLACED IN smart car 2.0 .OBJ
+COMPILER INVOKED BY: C:\单片机\C51\BIN\C51.EXE smart car 2.0 .c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg52.h>
+   2          #include <stdio.h>              //printf头文件  
+   3          #define uchar unsigned char   
+   4          #define uint unsigned int  
+   5          unsigned char receiveData;         
+   6          sbit ENA=P1^5;
+   7          sbit IN1=P1^4;
+   8          sbit IN2=P1^3;
+   9          sbit IN3=P1^2;
+  10          sbit IN4=P1^1;
+  11          sbit ENB=P1^0;  
+  12          void init()  
+  13          {  
+  14   1          TMOD=0x20;    //定时器工作方式，选择了定时器1，工作方式2 八位初值自动重装的8位定时器。          
+  15   1          TH1=0xfd;     //定时器1初值  ,设置波特率为9600 晶振11.0529MHZ?  
+  16   1          TL1=0xfd;  
+  17   1          TR1=1;        //开启定时器1  
+  18   1        
+  19   1          SM0=0;  
+  20   1          SM1=1;        //10位异步接收，（8位数据）波特率可变  
+  21   1          REN=1;        //允许串行口接收位  
+  22   1          EA=1;         //允许中断（总闸）  
+  23   1          ES=1;         //允许串口中断  
+  24   1      } 
+  25          void go_()
+  26          {
+  27   1      ENA=1;
+  28   1      ENB=1;
+  29   1      IN1=1;
+  30   1      IN2=0;
+  31   1      IN3=1;
+  32   1      IN4=0;
+  33   1      }
+  34          void back_()
+  35          {
+  36   1      ENA=1;
+  37   1      ENB=1;
+  38   1      IN1=0;
+  39   1      IN2=1;
+  40   1      IN3=0;
+  41   1      IN4=1;
+  42   1      } 
+  43          void left_()
+  44          {
+  45   1      ENA=1;
+  46   1      IN1=0;
+  47   1      IN2=1;
+  48   1      ENB=1;
+  49   1      IN3=1;
+  50   1      IN4=0;
+  51   1      }
+  52          void right_()
+  53          {
+  54   1      ENA=1;
+  55   1      IN1=1;
+C51 COMPILER V9.01   SMART_CAR_2_0_                                                        03/26/2021 20:14:03 PAGE 2   
+
+  56   1      IN2=0;
+  57   1      ENB=1;
+  58   1      IN3=0;
+  59   1      IN4=1;
+  60   1      }
+  61          void main()  
+  62          {  
+  63   1              init();     
+  64   1              while(1)  
+  65   1      {  
+  66   2      
+  67   2      
+  68   2               if(receiveData=='G')
+  69   2               { go_(); }
+  70   2               if(receiveData=='B')
+  71   2               { back_(); }
+  72   2               if(receiveData=='L')
+  73   2               {left_();}
+  74   2               if(receiveData=='R')
+  75   2               {right_();}
+  76   2               }  
+  77   1      }  
+  78            
+  79          void ser() interrupt 4  
+  80          {        
+  81   1      
+  82   1      
+  83   1              receiveData=SBUF; //出去接收到的数据
+  84   1              RI = 0;           //清除接收中断标志位
+  85   1              SBUF=receiveData; //将接收到的数据放入到发送寄存器
+  86   1              while(!TI);               //等待发送数据完成
+  87   1              TI=0;                     //清除发送完成标志位
+  88   1       
+  89   1      }  
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    125    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

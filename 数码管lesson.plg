@@ -1,0 +1,48 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+D:\³ÌĞò´óÈ«\keilc51\ÊıÂë¹Ülesson.uvproj
+Project File Date:  02/26/2021
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling ÊıÂë¹Ü.c...
+linking...
+Program Size: data=9.0 xdata=0 code=29
+"ÊıÂë¹Ülesson" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling ÊıÂë¹Ü.c...
+linking...
+Program Size: data=9.0 xdata=0 code=29
+"ÊıÂë¹Ülesson" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling ÊıÂë¹Ü.c...
+ÊÂë¹Ü.C(16): error C141: syntax error near 'unsigned'
+ÊÂë¹Ü.C(16): error C202: 'num': undefined identifier
+ÊÂë¹Ü.C(18): error C202: 'num': undefined identifier
+ÊÂë¹Ü.C(20): error C202: 'num': undefined identifier
+Target not created
+Build target 'Target 1'
+compiling ÊıÂë¹Ü.c...
+ÊÂë¹Ü.C(16): error C141: syntax error near 'unsigned'
+ÊÂë¹Ü.C(16): error C202: 'num': undefined identifier
+ÊÂë¹Ü.C(18): error C202: 'num': undefined identifier
+ÊÂë¹Ü.C(20): error C202: 'num': undefined identifier
+Target not created
+Build target 'Target 1'
+compiling ÊıÂë¹Ü.c...
+linking...
+Program Size: data=10.0 xdata=0 code=101
+"ÊıÂë¹Ülesson" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling ÊıÂë¹Ü.c...
+linking...
+Program Size: data=10.0 xdata=0 code=114
+"ÊıÂë¹Ülesson" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling ÊıÂë¹Ü.c...
+linking...
+Program Size: data=10.0 xdata=0 code=114
+"ÊıÂë¹Ülesson" - 0 Error(s), 0 Warning(s).

@@ -1,0 +1,95 @@
+C51 COMPILER V9.57.0.0   MAIN                                                              04/21/2021 18:02:10 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\out\main.obj
+COMPILER INVOKED BY: D:\keil5app\Keil uvision C51\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRI
+                    -NT(.\out\main.lst) TABS(2) OBJECT(.\out\main.obj)
+
+line level    source
+
+   1          #include "STC8G.h"
+   2          #include "OLED.h"
+   3          #include "I2C.h"
+   4          #include "board.h"
+   5          #include "dino.h"
+   6          
+   7          void Pin_Init()
+   8          {
+   9   1        P1M0 = 0x43; //LED OUT PUT
+  10   1        P1M1 = 0x00;
+  11   1        
+  12   1        LED0 = LED1 = LED2 = 0; //Turn Off All Led
+  13   1        
+  14   1        P3M0 = 0x00;
+  15   1        P3M1 = 0x00;
+  16   1        
+  17   1        P5M0 = 0x10;
+  18   1        P5M1 = 0x00;
+  19   1        
+  20   1        BEEP = 0;
+  21   1        
+  22   1        SW1 = SW2 = SW3 = SW4 = SW5 = SW6 = 1;
+  23   1      }
+  24          
+  25          unsigned char r =0;
+  26          
+  27          void time0_irs(void) interrupt 1
+  28          {
+  29   1        r++;
+  30   1        Dino_Tick();
+  31   1      }
+  32          
+  33          void Time_init()
+  34          {
+  35   1        TMOD = 0;
+  36   1        TL0 = 0x30;
+  37   1        TH0 = 0xf8;
+  38   1        TR0=1;
+  39   1        ET0=1;
+  40   1        
+  41   1        EA=1;
+  42   1      }
+  43          
+  44          unsigned char Ramod(unsigned char mod)
+  45          {
+  46   1        return r%mod;
+  47   1      }
+  48          
+  49          /*******************************************************************************
+  50          * 函 数 名       : main
+  51          * 函数功能     : 主函数
+  52          * 输    入       : 无
+  53          * 输    出       : 无
+  54          *******************************************************************************/
+C51 COMPILER V9.57.0.0   MAIN                                                              04/21/2021 18:02:10 PAGE 2   
+
+  55          void main()
+  56          {
+  57   1          Pin_Init();
+  58   1        
+  59   1          OLED_Init();
+  60   1          OLED_DisplayStr(100,0,"Game");
+  61   1          Time_init();
+  62   1        
+  63   1          Dino_Start();
+  64   1      
+  65   1          while (1)
+  66   1          {
+  67   2            Delay_ms(1);
+  68   2          } 
+  69   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    155    ----
+   CONSTANT SIZE    =      5    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

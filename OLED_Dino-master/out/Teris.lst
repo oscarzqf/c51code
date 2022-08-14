@@ -1,0 +1,13 @@
+C51 COMPILER V9.57.0.0   TERIS                                                             04/21/2021 18:01:53 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE TERIS
+OBJECT MODULE PLACED IN .\out\Teris.obj
+COMPILER INVOKED BY: D:\keil5app\Keil uvision C51\C51\BIN\C51.EXE Teris.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PR
+                    -INT(.\out\Teris.lst) TABS(2) OBJECT(.\out\Teris.obj)
+
+line level    source
+
+*** ERROR C318 OF Teris.c: can't open file 'Teris.c'
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)

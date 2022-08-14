@@ -1,0 +1,73 @@
+C51 COMPILER V9.01   JUZHENGBOARD                                                          02/27/2021 21:01:30 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE JUZHENGBOARD
+OBJECT MODULE PLACED IN juzhengboard.OBJ
+COMPILER INVOKED BY: C:\µ¥Æ¬»ú\C51\BIN\C51.EXE juzhengboard.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg52.h>
+   2          #define uint unsigned int
+   3          #define uchar unsigned char
+   4          sbit dula=P2^6;
+   5          sbit wela=P2^7;
+   6          uchar temp,num;
+   7          uchar code table[]={  0x3f,0x06,0x5b,0x4f,
+   8                                                    0x66,0x6d,0x7d,0x07,
+   9                                                    0x7f,0x6f,0x77,0x7c,
+  10                                                    0x39,0x5e,0x79,0x71};
+  11          void delay(uint z);
+  12          void main()
+  13          {
+  14   1      wela=1;
+  15   1      P0=0xc0;
+  16   1      wela=0;
+  17   1      while(1)
+  18   1      {
+  19   2      P3=0xfe;
+  20   2      temp=P3;
+  21   2      temp=temp&0xf0;
+  22   2      while(temp!=0xf0)
+  23   2      {
+  24   3      delay(5);
+  25   3      temp=P3;
+  26   3      temp=temp&0xf0;
+  27   3      while(temp!=0xf0)
+  28   3      {
+  29   4      switch(temp)
+  30   4      {
+  31   5                 case 0xe0 : num=1;  break;
+  32   5                         case 0xd0 : num=2;  break;
+  33   5                         case 0xb0 : num=3;  break;
+  34   5                         case 0x70 : num=4;  break;
+  35   5      }
+  36   4      dula=1;
+  37   4      P0=table[num-1];
+  38   4      dula=0;
+  39   4      }
+  40   3      }
+  41   2      }
+  42   1      }
+  43          
+  44          void delay(uint z)
+  45          {uint x,y;
+  46   1      for(x=z;x>0;x++)
+  47   1      for(y=110;y>0;y++);
+  48   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    121    ----
+   CONSTANT SIZE    =     16    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+C51 COMPILER V9.01   JUZHENGBOARD                                                          02/27/2021 21:01:30 PAGE 2   
+
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,295 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        06/20/2021  23:19:41  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\单片机\C51\BIN\BL51.EXE 黄杰小车.obj TO 黄杰 RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  黄杰小车.obj (黄絖小车)
+  C:\单片机\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\单片机\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  黄杰 (黄絖小车)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0006H     UNIT         ?DT?黄絖小车
+            DATA    000EH     0001H     UNIT         _DATA_GROUP_
+                    000FH     0011H                  *** GAP ***
+            BIT     0020H.0   0000H.2   UNIT         ?BI?黄絖小车
+                    0020H.2   0000H.6                *** GAP ***
+            IDATA   0021H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+                    000EH     07F2H                  *** GAP ***
+            CODE    0800H     008CH     UNIT         ?C_C51STARTUP
+            CODE    088CH     004AH     UNIT         ?PR?MAIN?黄絖小车
+            CODE    08D6H     0021H     UNIT         ?PR?TIMER0?黄絖小车
+            CODE    08F7H     0020H     UNIT         ?PR?_DELAY?黄絖小车
+            CODE    0917H     001EH     UNIT         ?PR?PWM_OUT_LEFT_MOTO?黄絖小车
+            CODE    0935H     001EH     UNIT         ?PR?PWM_OUT_RIGHT_MOTO?黄絖小车
+            CODE    0953H     0015H     UNIT         ?C_INITSEG
+            CODE    0968H     0010H     UNIT         ?PR?TIMER0_INIT?黄絖小车
+            CODE    0978H     000FH     UNIT         ?PR?FRONT_RUN?黄絖小车
+            CODE    0987H     000FH     UNIT         ?PR?BACK_RUN?黄絖小车
+            CODE    0996H     000FH     UNIT         ?PR?LEFT_RUN?黄絖小车
+            CODE    09A5H     000FH     UNIT         ?PR?RIGHT_RUN?黄絖小车
+            CODE    09B4H     0009H     UNIT         ?PR?STOP?黄絖小车
+
+
+
+OVERLAY MAP OF MODULE:   黄杰 (黄絖小车)
+
+
+SEGMENT                                   DATA_GROUP 
+  +--> CALLED SEGMENT                   START    LENGTH
+-------------------------------------------------------
+?PR?TIMER0?黄絖小车                     -----    -----
+  +--> ?PR?PWM_OUT_LEFT_MOTO?黄絖小车
+  +--> ?PR?PWM_OUT_RIGHT_MOTO?黄絖小车
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/20/2021  23:19:41  PAGE 2
+
+
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP                           -----    -----
+  +--> ?PR?MAIN?黄絖小车
+  +--> ?C_INITSEG
+
+?PR?MAIN?黄絖小车                       000EH    0001H
+  +--> ?PR?STOP?黄絖小车
+  +--> ?PR?TIMER0_INIT?黄絖小车
+  +--> ?PR?FRONT_RUN?黄絖小车
+  +--> ?PR?LEFT_RUN?黄絖小车
+  +--> ?PR?RIGHT_RUN?黄絖小车
+  +--> ?PR?_DELAY?黄絖小车
+
+
+
+SYMBOL TABLE OF MODULE:  黄杰 (黄絖小车)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        黄絖小车
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00A0H         PUBLIC        P2
+  B:00A8H.7       PUBLIC        EA
+  D:0008H         PUBLIC        pwm_val_left
+  B:0090H.0       PUBLIC        P1_0
+  C:08F7H         PUBLIC        _delay
+  B:0090H.1       PUBLIC        P1_1
+  B:0090H.2       PUBLIC        P1_2
+  B:0090H.3       PUBLIC        P1_3
+  B:0090H.4       PUBLIC        P1_4
+  B:0090H.5       PUBLIC        P1_5
+  B:0090H.6       PUBLIC        P1_6
+  B:0090H.7       PUBLIC        P1_7
+  B:00B0H.6       PUBLIC        P3_6
+  B:00B0H.7       PUBLIC        P3_7
+  C:088CH         PUBLIC        main
+  D:0009H         PUBLIC        time
+  C:0935H         PUBLIC        pwm_out_right_moto
+  D:0089H         PUBLIC        TMOD
+  C:0917H         PUBLIC        pwm_out_left_moto
+  C:09B4H         PUBLIC        stop
+  B:00A8H.1       PUBLIC        ET0
+  C:0987H         PUBLIC        back_run
+  C:0968H         PUBLIC        timer0_Init
+  B:0020H.0       PUBLIC        Right_moto_stop
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  C:08D6H         PUBLIC        timer0
+  B:0088H.4       PUBLIC        TR0
+  C:09A5H         PUBLIC        right_run
+  B:0020H.1       PUBLIC        Left_moto_stop
+  C:0978H         PUBLIC        front_run
+  C:0996H         PUBLIC        left_run
+  D:000BH         PUBLIC        push_val_right
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/20/2021  23:19:41  PAGE 3
+
+
+  D:000CH         PUBLIC        push_val_left
+  D:000DH         PUBLIC        pwm_val_right
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        k
+  -------         DO            
+  D:0004H         SYMBOL        x
+  D:0002H         SYMBOL        y
+  -------         ENDDO         
+  C:08F7H         LINE#         40
+  C:08F7H         LINE#         41
+  C:08F7H         LINE#         43
+  C:0901H         LINE#         44
+  C:0916H         LINE#         45
+  -------         ENDPROC       _DELAY
+  -------         PROC          FRONT_RUN
+  C:0978H         LINE#         50
+  C:0978H         LINE#         51
+  C:0978H         LINE#         52
+  C:097BH         LINE#         54
+  C:097EH         LINE#         55
+  C:0982H         LINE#         56
+  C:0986H         LINE#         57
+  -------         ENDPROC       FRONT_RUN
+  -------         PROC          BACK_RUN
+  C:0987H         LINE#         62
+  C:0987H         LINE#         63
+  C:0987H         LINE#         64
+  C:098AH         LINE#         65
+  C:098DH         LINE#         66
+  C:0991H         LINE#         67
+  C:0995H         LINE#         68
+  -------         ENDPROC       BACK_RUN
+  -------         PROC          LEFT_RUN
+  C:0996H         LINE#         74
+  C:0996H         LINE#         75
+  C:0996H         LINE#         76
+  C:0999H         LINE#         77
+  C:099CH         LINE#         78
+  C:09A0H         LINE#         79
+  C:09A4H         LINE#         80
+  -------         ENDPROC       LEFT_RUN
+  -------         PROC          RIGHT_RUN
+  C:09A5H         LINE#         85
+  C:09A5H         LINE#         86
+  C:09A5H         LINE#         87
+  C:09A8H         LINE#         88
+  C:09ABH         LINE#         89
+  C:09AFH         LINE#         90
+  C:09B3H         LINE#         91
+  -------         ENDPROC       RIGHT_RUN
+  -------         PROC          STOP
+  C:09B4H         LINE#         96
+  C:09B4H         LINE#         97
+  C:09B4H         LINE#         98
+  C:09B8H         LINE#         99
+  C:09BCH         LINE#         100
+  -------         ENDPROC       STOP
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/20/2021  23:19:41  PAGE 4
+
+
+  -------         PROC          PWM_OUT_LEFT_MOTO
+  C:0917H         LINE#         105
+  C:0917H         LINE#         106
+  C:0917H         LINE#         107
+  C:091AH         LINE#         108
+  C:091AH         LINE#         109
+  C:0921H         LINE#         110
+  C:0921H         LINE#         111
+  C:0923H         LINE#         113
+  C:0925H         LINE#         115
+  C:0925H         LINE#         116
+  C:0927H         LINE#         118
+  C:0927H         LINE#         119
+  C:092EH         LINE#         120
+  C:0931H         LINE#         121
+  C:0932H         LINE#         123
+  C:0932H         LINE#         124
+  C:0934H         LINE#         125
+  C:0934H         LINE#         126
+  -------         ENDPROC       PWM_OUT_LEFT_MOTO
+  -------         PROC          PWM_OUT_RIGHT_MOTO
+  C:0935H         LINE#         131
+  C:0935H         LINE#         132
+  C:0935H         LINE#         133
+  C:0938H         LINE#         134
+  C:0938H         LINE#         135
+  C:093FH         LINE#         136
+  C:093FH         LINE#         137
+  C:0941H         LINE#         138
+  C:0943H         LINE#         140
+  C:0943H         LINE#         141
+  C:0945H         LINE#         142
+  C:0945H         LINE#         143
+  C:094CH         LINE#         144
+  C:094FH         LINE#         145
+  C:0950H         LINE#         147
+  C:0950H         LINE#         148
+  C:0952H         LINE#         150
+  C:0952H         LINE#         151
+  -------         ENDPROC       PWM_OUT_RIGHT_MOTO
+  -------         PROC          TIMER0_INIT
+  C:0968H         LINE#         156
+  C:0968H         LINE#         157
+  C:0968H         LINE#         158
+  C:096BH         LINE#         159
+  C:096EH         LINE#         160
+  C:0971H         LINE#         161
+  C:0973H         LINE#         162
+  C:0975H         LINE#         163
+  C:0977H         LINE#         164
+  -------         ENDPROC       TIMER0_INIT
+  -------         PROC          TIMER0
+  C:08D6H         LINE#         169
+  C:08DAH         LINE#         171
+  C:08DDH         LINE#         172
+  C:08E0H         LINE#         173
+  C:08E8H         LINE#         174
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/20/2021  23:19:41  PAGE 5
+
+
+  C:08EAH         LINE#         175
+  C:08ECH         LINE#         176
+  C:08EFH         LINE#         177
+  C:08F2H         LINE#         178
+  -------         ENDPROC       TIMER0
+  -------         PROC          MAIN
+  -------         DO            
+  D:000EH         SYMBOL        i
+  -------         ENDDO         
+  C:088CH         LINE#         183
+  C:088CH         LINE#         184
+  C:088CH         LINE#         186
+  C:088FH         LINE#         188
+  C:0892H         LINE#         189
+  C:0892H         LINE#         190
+  C:0892H         LINE#         191
+  C:0898H         LINE#         192
+  C:089DH         LINE#         194
+  C:089DH         LINE#         195
+  C:08A3H         LINE#         196
+  C:08A3H         LINE#         197
+  C:08A6H         LINE#         198
+  C:08A6H         LINE#         199
+  C:08ACH         LINE#         200
+  C:08ACH         LINE#         201
+  C:08AFH         LINE#         202
+  C:08AFH         LINE#         203
+  C:08B5H         LINE#         204
+  C:08B5H         LINE#         205
+  C:08B8H         LINE#         206
+  C:08BCH         LINE#         207
+  C:08C3H         LINE#         208
+  C:08C7H         LINE#         209
+  C:08CAH         LINE#         210
+  C:08CEH         LINE#         211
+  C:08D1H         LINE#         212
+  C:08D4H         LINE#         213
+  C:08D4H         LINE#         214
+  C:08D4H         LINE#         215
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        黄絖小车
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?BACK_RUN?黄絖小车
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0133H BYTE (14%) *
+******************************************************************************
+
+Program Size: data=16.2 xdata=0 code=451
+LINK/LOCATE RUN COMPLETE.  1 WARNING(S),  0 ERROR(S)

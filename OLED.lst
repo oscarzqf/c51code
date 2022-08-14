@@ -1,0 +1,215 @@
+C51 COMPILER V9.01   OLED                                                                  04/21/2021 17:38:50 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE OLED
+OBJECT MODULE PLACED IN OLED.obj
+COMPILER INVOKED BY: C:\��Ƭ��\C51\BIN\C51.EXE OLED_Dino-master\OLED.c BROWSE DEBUG OBJECTEXTEND PRINT(.\OLED.lst) OBJEC
+                    -T(OLED.obj)
+
+line level    source
+
+   1          
+   2          #include "OLED.h"
+*** WARNING C318 IN LINE 5 OF OLED_DINO-MASTER\I2C.H: can't open file 'stc8g.h'
+*** ERROR C202 IN LINE 16 OF OLED_DINO-MASTER\I2C.H: 'P3': undefined identifier
+*** ERROR C202 IN LINE 17 OF OLED_DINO-MASTER\I2C.H: 'P3': undefined identifier
+   3          #include "OLEDFont.h"
+   4          
+   5          /***OLED12864/0.96'/SSD1306***/
+   6          
+   7          /**
+   8           * @description: 51延时函数 @11.0592MHz
+   9           * @param {uint ms 毫秒} 
+  10           * @return: void
+  11           */
+  12          void Delay_ms(uint ms)
+  13          {
+  14   1              unsigned char i, j;
+  15   1                      while(ms--)
+  16   1                      {
+  17   2                              _nop_();
+  18   2                              _nop_();
+  19   2                              _nop_();
+  20   2                              i = 11;
+  21   2                              j = 190;
+  22   2                              do
+  23   2                              {
+  24   3                                      while (--j);
+  25   3                              } while (--i);
+  26   2                      }
+  27   1      }
+  28          
+  29          /**
+  30           * @function: void OLED_Write_Byte(uchar WCommand,uchar cmdORdata)
+  31           * @description: 
+  32           * @param {uchar WData待写入的内容，uchar cmdORdata指明写入指令还是数据} 
+  33           * @return: void
+  34           */
+  35          void OLED_Write_Byte(uchar WData, uchar cmdORdata)
+  36          {
+  37   1          I2C_Start();
+  38   1          I2C_Write_Byte(OLED_Addr + 0); //写入器件地址(bit0=1读，bit0=0写)
+  39   1          I2C_Wait_Ack();
+  40   1          I2C_Write_Byte(cmdORdata); //指明写入指令还是数据
+  41   1          I2C_Wait_Ack();
+  42   1          I2C_Write_Byte(WData); //写入数据内容
+  43   1          I2C_Wait_Ack();
+  44   1          I2C_Stop();
+  45   1      }
+  46          
+  47          /**
+  48           * @function: void OLED_Fill(uchar Fill_Data)
+  49           * @description: 全屏显示相同数据(主要用去清屏)
+  50           * @param {uchar Fill_Data待全屏写入的数据} 
+  51           * @return: void
+C51 COMPILER V9.01   OLED                                                                  04/21/2021 17:38:50 PAGE 2   
+
+  52           */
+  53          void OLED_Fill(uchar Fill_Data)
+  54          {
+  55   1          uchar i, j;
+  56   1          for (i = 0; i < 8; i++) //8页，共需要循环显示8次
+  57   1          {
+  58   2              OLED_Write_Byte(0xb0 + i, isCmd); //页地址0~7
+  59   2              OLED_Write_Byte(0x10, isCmd);     //设置高位列地址
+  60   2              OLED_Write_Byte(0x00, isCmd);     //设置低位列地址
+  61   2              for (j = 0; j < OLED_Width; j++)  //每页有128列需要显示
+  62   2                  OLED_Write_Byte(Fill_Data, isData);
+  63   2          }
+  64   1      }
+  65          
+  66          
+  67          /**
+  68           * @function: void OLED_Set_Pos(uchar x,uchar y)
+  69           * @description: 设置起始显示位置
+  70           * @param {uchar x起始显示列0~127、uchar y起始显示页0~7} 
+  71           * @return: void
+  72           */
+  73          void OLED_Set_Pos(uchar x, uchar y)
+  74          {
+  75   1          OLED_Write_Byte(0xb0 + y, isCmd);               //起始显示的页
+  76   1          OLED_Write_Byte((x & 0xf0) >> 4 | 0x10, isCmd); //设置高位列地址
+  77   1          OLED_Write_Byte(x & 0x0f, isCmd);               //设置低位列地址
+  78   1      }
+  79          
+  80          /**
+  81           * @function: void OLED_Init()
+  82           * @description: OLED初始化函数
+  83           * @param {void} 
+  84           * @return: void
+  85           */
+  86          void OLED_Init()
+  87          {
+  88   1          Delay_ms(200);
+  89   1          OLED_Write_Byte(0xae, isCmd); //关闭显示器 display off
+  90   1          OLED_Write_Byte(0x00, isCmd); //设置低位列地址 set low column address
+  91   1          OLED_Write_Byte(0x10, isCmd); //设置高位列地址 set high column address
+  92   1          OLED_Write_Byte(0x40, isCmd); //设置起始行地址 set start line address
+  93   1          OLED_Write_Byte(0xb0, isCmd); //设置页地址 set page address
+  94   1          OLED_Write_Byte(0x81, isCmd); //设置对比度
+  95   1          OLED_Write_Byte(0xff, isCmd); //对比度,数值越大对比度越高
+  96   1          OLED_Write_Byte(0xa1, isCmd); //设置段重新映射 不左右翻转set segment remap
+  97   1          OLED_Write_Byte(0xa6, isCmd); //设置正常/反向 normal / reverse
+  98   1          OLED_Write_Byte(0xa8, isCmd); //设置多路复用比(1-64) set multiplex ratio(1 to 64)
+  99   1          OLED_Write_Byte(0x3f, isCmd); //设定值1/32  1/32 duty
+ 100   1          OLED_Write_Byte(0xc8, isCmd); //扫描方向 不上下翻转Com scan direction
+ 101   1      
+ 102   1          OLED_Write_Byte(0xd3, isCmd); //设置显示偏移 set display offset
+ 103   1          OLED_Write_Byte(0x00, isCmd); //
+ 104   1      
+ 105   1          OLED_Write_Byte(0xd5, isCmd); //设置osc分区 set osc division
+ 106   1          OLED_Write_Byte(0x80, isCmd); //
+ 107   1      
+ 108   1          OLED_Write_Byte(0xd8, isCmd); //关闭区域颜色模式 set area color mode off
+ 109   1          OLED_Write_Byte(0x05, isCmd); //
+ 110   1      
+ 111   1          OLED_Write_Byte(0xd9, isCmd); //设置预充电期 Set Pre-Charge Period
+ 112   1          OLED_Write_Byte(0xf1, isCmd); //
+ 113   1      
+C51 COMPILER V9.01   OLED                                                                  04/21/2021 17:38:50 PAGE 3   
+
+ 114   1          OLED_Write_Byte(0xda, isCmd); //设置com引脚配置 set com pin configuartion
+ 115   1          OLED_Write_Byte(0x12, isCmd); //
+ 116   1      
+ 117   1          OLED_Write_Byte(0xdb, isCmd); //设置vcomh set Vcomh
+ 118   1          OLED_Write_Byte(0x30, isCmd); //
+ 119   1      
+ 120   1          OLED_Write_Byte(0x8d, isCmd); //设置电源泵启用 set charge pump enable
+ 121   1          OLED_Write_Byte(0x14, isCmd); //
+ 122   1      
+ 123   1          OLED_Write_Byte(0xa4, isCmd); //设置全局显示开启；bit0，1开启，0关闭(白屏/黑屏)
+ 124   1          OLED_Write_Byte(0xa6, isCmd); //设置显示方式，bit0，1反相显示，0正常显示
+ 125   1      
+ 126   1          OLED_Write_Byte(0xaf, isCmd); //打开oled面板 turn on oled panel
+ 127   1      
+ 128   1          OLED_Fill(0x00); //清屏
+ 129   1      }
+ 130          
+ 131          /**
+ 132           * @function: void OLED_DisplayChar(uchar x, uchar y, uchar DisplayChar, uchar TextSize)
+ 133           * @description: 在OLED12864特定位置显示一个字符
+ 134           * @param {uchar x列, uchar y行, uchar DisplayChar显示的字符, uchar TextSize字体大小} 
+ 135           * @return: void
+ 136           */
+ 137          void OLED_DisplayChar(uchar x, uchar y, uchar DisplayChar)
+ 138          {
+ 139   1          uchar c = 0, i;
+ 140   1          c = DisplayChar - 32; //等同于减去个空格c = DisplayChar - ' '; 得到显示字符在库中的�
+             -��移地址
+ 141   1                      OLED_Set_Pos(x, y); //开始显示位置
+ 142   1                      for (i = 0; i < 6; i++)
+ 143   1                                      OLED_Write_Byte(F6X8[c][i], isData); //显示一个6X8字符
+ 144   1      }
+ 145          
+ 146          /**
+ 147           * @function: void OLED_DisplayStr(uchar x, uchar y, uchar *DisplayStr, uchar TextSize)
+ 148           * @description: 在OLED12864特定位置显示字符串
+ 149           * @param {uchar x列, uchar y行, uchar *DisplayStr待显示的字符串, uchar TextSize字体大小} 
+ 150           * @return: void
+ 151           */
+ 152          void OLED_DisplayStr(uchar x, uchar y, uchar *DisplayStr) //(uchar *DisplayStr)改成(uchar DisplayStr[])�
+             -��可
+ 153          {
+ 154   1          uchar j = 0;
+ 155   1          while (DisplayStr[j] != '\0') //判断字符串是否显示完成
+ 156   1          {
+ 157   2              OLED_DisplayChar(x, y, DisplayStr[j]);
+ 158   2              x += 6;
+ 159   2      
+ 160   2              if (x > 122) //TextSize6x8如果一行不够显示了，从下一行继续显示
+ 161   2              {
+ 162   3                  x = 0;
+ 163   3                  y++;
+ 164   3              }
+ 165   2              j++;
+ 166   2          }
+ 167   1      }
+ 168          
+ 169          /**
+ 170           * @function: void OLED_DisplayBMP(uchar x0, uchar y0, uchar x1, uchar y1, uchar *BMP)
+ 171           * @description: 在OLED12864特定位置显示BMP图片
+ 172           * @param {uchar x0,uchar y0(x0,y0显示起点坐标x:0~127,y0:0~7)、uchar x1,uchar y1(x1,y1显示结束�
+             -��标x0:0~127,y0:0~7)、uchar *BMP待显示的图片数据} 
+C51 COMPILER V9.01   OLED                                                                  04/21/2021 17:38:50 PAGE 4   
+
+ 173           * @return: void
+ 174           */
+ 175          #if 0
+              void OLED_DisplayBMP(uchar x0, uchar y0, uchar x1, uchar y1, uchar *BMP)
+              {
+                  uint j = 0;
+                  uchar x, y;
+                  if (y1 % 8 == 0) //用于确定显示几页
+                      y = y1 / 8;
+                  else
+                      y = y1 / 8 + 1;
+                  for (y = y0; y < y1; y++) //从设置的起始页开始显示到结束页
+                  {
+                      OLED_Set_Pos(x0, y);                   //进入下一页显示起始位置
+                      for (x = x0; x < x1; x++)              //从设置开始列显示到结束列
+                          OLED_Write_Byte(BMP[j++], isData); //逐个传入显示数据
+                  }
+              }
+              #endif
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  2 ERROR(S)

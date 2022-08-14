@@ -1,0 +1,202 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        02/27/2021  15:26:19  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\单片机\C51\BIN\BL51.EXE excrise001.obj TO lesson4 RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  excrise001.obj (EXCRISE001)
+  C:\单片机\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  lesson4 (EXCRISE001)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0005H     UNIT         ?DT?EXCRISE001
+            DATA    000DH     0002H     UNIT         _DATA_GROUP_
+            IDATA   000FH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+                    000EH     07F2H                  *** GAP ***
+            CODE    0800H     0042H     UNIT         ?PR?_DISPLAY?EXCRISE001
+            CODE    0842H     003FH     UNIT         ?PR?MAIN?EXCRISE001
+            CODE    0881H     002CH     UNIT         ?PR?_DELAY?EXCRISE001
+            CODE    08ADH     0017H     UNIT         ?PR?INIT?EXCRISE001
+            CODE    08C4H     0010H     UNIT         ?CO?EXCRISE001
+            CODE    08D4H     000CH     UNIT         ?C_C51STARTUP
+            CODE    08E0H     0009H     UNIT         ?PR?TIMER0?EXCRISE001
+
+
+
+OVERLAY MAP OF MODULE:   lesson4 (EXCRISE001)
+
+
+SEGMENT                           DATA_GROUP 
+  +--> CALLED SEGMENT           START    LENGTH
+-----------------------------------------------
+?C_C51STARTUP                   -----    -----
+  +--> ?PR?MAIN?EXCRISE001
+
+?PR?MAIN?EXCRISE001             -----    -----
+  +--> ?PR?INIT?EXCRISE001
+  +--> ?PR?_DISPLAY?EXCRISE001
+
+?PR?_DISPLAY?EXCRISE001         000DH    0002H
+  +--> ?PR?_DELAY?EXCRISE001
+  +--> ?CO?EXCRISE001
+
+?PR?_DELAY?EXCRISE001           -----    -----
+  +--> ?CO?EXCRISE001
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/27/2021  15:26:19  PAGE 2
+
+
+
+
+
+SYMBOL TABLE OF MODULE:  lesson4 (EXCRISE001)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        EXCRISE001
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
+  C:08C4H         PUBLIC        table
+  D:00A8H         PUBLIC        IE
+  C:088DH         PUBLIC        _delay
+  D:00B8H         PUBLIC        IP
+  C:0842H         PUBLIC        main
+  B:00A0H.6       PUBLIC        dula
+  B:00A0H.7       PUBLIC        wela
+  D:0008H         PUBLIC        bai
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  C:08ADH         PUBLIC        init
+  D:0009H         PUBLIC        temp
+  D:000AH         PUBLIC        aa
+  D:000BH         PUBLIC        shi
+  B:00A8H.1       PUBLIC        ET0
+  D:000CH         PUBLIC        ge
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  C:08E0H         PUBLIC        timer0
+  B:0088H.4       PUBLIC        TR0
+  D:00C8H         PUBLIC        T2CON
+  C:0800H         PUBLIC        _display
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          MAIN
+  C:0842H         LINE#         15
+  C:0842H         LINE#         16
+  C:0842H         LINE#         17
+  C:0845H         LINE#         18
+  C:0845H         LINE#         19
+  C:0845H         LINE#         20
+  C:084AH         LINE#         21
+  C:084AH         LINE#         22
+  C:084DH         LINE#         23
+  C:084FH         LINE#         24
+  C:0854H         LINE#         25
+  C:0857H         LINE#         26
+  C:085FH         LINE#         27
+  C:086DH         LINE#         28
+  C:0876H         LINE#         29
+  C:087FH         LINE#         30
+  C:087FH         LINE#         31
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/27/2021  15:26:19  PAGE 3
+
+
+  -------         ENDPROC       MAIN
+  -------         PROC          TIMER0
+  C:08E0H         LINE#         33
+  C:08E0H         LINE#         35
+  C:08E3H         LINE#         36
+  C:08E6H         LINE#         37
+  C:08E8H         LINE#         38
+  -------         ENDPROC       TIMER0
+  -------         PROC          _DISPLAY
+  D:0007H         SYMBOL        bai
+  D:000DH         SYMBOL        shi
+  D:000EH         SYMBOL        ge
+  C:0800H         LINE#         39
+  C:0804H         LINE#         40
+  C:0804H         LINE#         41
+  C:0807H         LINE#         42
+  C:0809H         LINE#         43
+  C:080CH         LINE#         44
+  C:080EH         LINE#         45
+  C:0810H         LINE#         46
+  C:0811H         LINE#         47
+  C:0811H         LINE#         48
+  C:0814H         LINE#         50
+  C:0817H         LINE#         51
+  C:0819H         LINE#         52
+  C:081CH         LINE#         53
+  C:081EH         LINE#         54
+  C:0820H         LINE#         55
+  C:0822H         LINE#         56
+  C:0822H         LINE#         57
+  C:0825H         LINE#         59
+  C:0828H         LINE#         60
+  C:082AH         LINE#         61
+  C:082DH         LINE#         62
+  C:082FH         LINE#         63
+  C:0831H         LINE#         64
+  C:0839H         LINE#         65
+  C:083BH         LINE#         66
+  -------         ENDPROC       _DISPLAY
+  -------         PROC          INIT
+  C:08ADH         LINE#         69
+  C:08ADH         LINE#         70
+  C:08ADH         LINE#         71
+  C:08AFH         LINE#         72
+  C:08B1H         LINE#         73
+  C:08B4H         LINE#         74
+  C:08B7H         LINE#         75
+  C:08BAH         LINE#         76
+  C:08BDH         LINE#         77
+  C:08BFH         LINE#         78
+  C:08C1H         LINE#         79
+  C:08C3H         LINE#         80
+  -------         ENDPROC       INIT
+  -------         PROC          L?0018
+  -------         ENDPROC       L?0018
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        z
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/27/2021  15:26:19  PAGE 4
+
+
+  -------         DO            
+  D:0006H         SYMBOL        x
+  D:0004H         SYMBOL        y
+  -------         ENDDO         
+  C:088DH         LINE#         82
+  C:088DH         LINE#         83
+  C:088DH         LINE#         85
+  C:0896H         LINE#         86
+  C:08ACH         LINE#         88
+  -------         ENDPROC       _DELAY
+  -------         ENDMOD        EXCRISE001
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 00E0H BYTE (10%) *
+******************************************************************************
+
+Program Size: data=16.0 xdata=0 code=239
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,157 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        02/27/2021  11:57:20  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\单片机\C51\BIN\BL51.EXE lesson_4.obj TO lesson-4 RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  lesson_4.obj (LESSON_4)
+  C:\单片机\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  lesson-4 (LESSON_4)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0003H     UNIT         ?DT?LESSON_4
+            IDATA   000BH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+                    000EH     07F2H                  *** GAP ***
+            CODE    0800H     0041H     UNIT         ?PR?MAIN?LESSON_4
+            CODE    0841H     0032H     UNIT         ?PR?TIMER0?LESSON_4
+            CODE    0873H     001EH     UNIT         ?PR?_DELAY?LESSON_4
+            CODE    0891H     0010H     UNIT         ?CO?LESSON_4
+            CODE    08A1H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   lesson-4 (LESSON_4)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?PR?TIMER0?LESSON_4
+  +--> ?CO?LESSON_4
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP
+  +--> ?PR?MAIN?LESSON_4
+
+?PR?MAIN?LESSON_4
+  +--> ?CO?LESSON_4
+  +--> ?PR?_DELAY?LESSON_4
+
+
+
+SYMBOL TABLE OF MODULE:  lesson-4 (LESSON_4)
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/27/2021  11:57:20  PAGE 2
+
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        LESSON_4
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
+  C:0891H         PUBLIC        table
+  D:00A8H         PUBLIC        IE
+  C:0873H         PUBLIC        _delay
+  D:00B8H         PUBLIC        IP
+  C:0800H         PUBLIC        main
+  B:00A0H.6       PUBLIC        dula
+  B:00A0H.7       PUBLIC        wela
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  D:0008H         PUBLIC        temp
+  D:0009H         PUBLIC        aa
+  B:00A8H.1       PUBLIC        ET0
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  D:000AH         PUBLIC        num
+  C:0841H         PUBLIC        timer0
+  B:0088H.4       PUBLIC        TR0
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          MAIN
+  C:0800H         LINE#         13
+  C:0800H         LINE#         14
+  C:0800H         LINE#         15
+  C:0803H         LINE#         16
+  C:0805H         LINE#         17
+  C:0808H         LINE#         18
+  C:080BH         LINE#         19
+  C:080EH         LINE#         20
+  C:0810H         LINE#         21
+  C:0812H         LINE#         22
+  C:0814H         LINE#         24
+  C:0817H         LINE#         25
+  C:0819H         LINE#         26
+  C:081FH         LINE#         27
+  C:0821H         LINE#         28
+  C:0823H         LINE#         29
+  C:0826H         LINE#         30
+  C:0828H         LINE#         31
+  C:0828H         LINE#         32
+  C:0828H         LINE#         33
+  C:082BH         LINE#         34
+  C:0832H         LINE#         35
+  C:083FH         LINE#         37
+  -------         ENDPROC       MAIN
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        z
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/27/2021  11:57:20  PAGE 3
+
+
+  -------         DO            
+  D:0006H         SYMBOL        x
+  D:0004H         SYMBOL        y
+  -------         ENDDO         
+  C:0873H         LINE#         42
+  C:0873H         LINE#         43
+  C:0873H         LINE#         44
+  C:087CH         LINE#         45
+  C:0890H         LINE#         46
+  -------         ENDPROC       _DELAY
+  -------         PROC          TIMER0
+  C:0841H         LINE#         47
+  C:0849H         LINE#         49
+  C:084CH         LINE#         50
+  C:084FH         LINE#         51
+  C:0851H         LINE#         52
+  C:0856H         LINE#         53
+  C:0856H         LINE#         54
+  C:0858H         LINE#         55
+  C:085DH         LINE#         56
+  C:0860H         LINE#         57
+  C:0862H         LINE#         58
+  C:086AH         LINE#         59
+  C:086AH         LINE#         63
+  -------         ENDPROC       TIMER0
+  -------         ENDMOD        LESSON_4
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 00A4H BYTE ( 8%) *
+******************************************************************************
+
+Program Size: data=12.0 xdata=0 code=179
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

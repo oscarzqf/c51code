@@ -1,0 +1,6 @@
+".\out\main.obj",
+".\out\I2C.obj",
+".\out\OLED.obj",
+".\out\dino.obj" 
+TO ".\out\template" 
+PRINT(".\out\template.m51") RAMSIZE(256) 

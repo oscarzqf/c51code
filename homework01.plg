@@ -1,0 +1,49 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+D:\³ÌÐò´óÈ«\keilc51\homework01.uvproj
+Project File Date:  02/27/2021
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling home.c...
+HOME.C(55): error C141: syntax error near ')'
+Target not created
+Build target 'Target 1'
+compiling home.c...
+HOME.C(55): error C141: syntax error near ')'
+Target not created
+Build target 'Target 1'
+compiling home.c...
+HOME.C(55): error C141: syntax error near ')'
+Target not created
+Build target 'Target 1'
+compiling home.c...
+HOME.C(55): error C141: syntax error near ')'
+Target not created
+Build target 'Target 1'
+compiling home.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?MAN?HOME
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?CO?HOME
+Program Size: data=10.0 xdata=0 code=164
+"homework01" - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+compiling home.c...
+linking...
+Program Size: data=11.0 xdata=0 code=163
+"homework01" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling home.c...
+linking...
+Program Size: data=19.0 xdata=0 code=627
+"homework01" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling home.c...
+linking...
+Program Size: data=19.0 xdata=0 code=627
+"homework01" - 0 Error(s), 0 Warning(s).
